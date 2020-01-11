@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+/* default styles */
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+body,
+ul,
+li,
+div,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 14px;
+  font-family: "Microsoft YaHei", "微软雅黑", "San Francisco", "Helvetica Neue", "PingFang SC",
+  "Hiragino Sans GB", Arial, sans-serif;  
+}
+
+table {
+  border-collapse: collapse;
+}
+
+li {
+  list-style: none;
+}
+/* resize 允许用户拉伸 */
+textarea {
+  resize: none;
+}
+
+/* 清除浮动 */
+.clear-float:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+input {
+  outline: none;
+}
+
+/* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
+/* 最后还是应该用div去写 */
+::-webkit-scrollbar {
+  width: 11px;
+  /* background-color: #eee; */
+}
+
+/* 定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  width: 50px;
+  border-radius: 10px;
+  background-color: #d1d1d1;
+}
