@@ -31,19 +31,6 @@ const webpackConfig = merge(webpackBase, {
       assetNameRegExp: /\.css$/g,
       cssProcessor: cssnano
     }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../app/index.html'),
-      filename: 'index.html',
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
     new CleanWebpackPlugin(),
     new SpeedMeasureWebpackPlugin()
   ]

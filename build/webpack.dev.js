@@ -16,7 +16,8 @@ const webpackConfig = merge(webpackBase, {
     contentBase: '../dist',
     port: 2222,
     hot: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
+    historyApiFallback: true // 解决 bowserRouter 刷新的时候出现 can't get.
   },
   mode: 'development',
   plugins: [
