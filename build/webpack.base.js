@@ -2,6 +2,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 // const webpack = require('webpack')
 // Notice me! please use image-webpack-plugin to minify images' size.
 
@@ -65,7 +66,21 @@ module.exports = {
       filename: './css/[name]_[contenthash:8].css'
     }),
     new FriendlyErrorsWebpackPlugin(),
-    new HardSourceWebpackPlugin()
+    new HardSourceWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, '../app/index.html'),
+      filename: 'index.html',
+      inject: true,
+      favicon: './favicon.ico',
+      minify: {
+        html5: true,
+        collapseWhitespace: true,
+        preserveLineBreaks: false,
+        minifyCSS: true,
+        minifyJS: true,
+        removeComments: false
+      }
+    })
     // new webpack.DllReferencePlugin({ // 引入这个插件, 将我们经常打包的东西引入进来, 优化项目体积和构建速度.
     //   // eslint-disable-next-line global-require
     //   manifest: require('../static/library.json')

@@ -37,7 +37,17 @@ export default function App() {
   return (
     <Router>
       <Switch>
+<<<<<<< HEAD
         { renderRoutes(routes) }
+=======
+        {
+          routes.map((route) => (
+            <Route path={route.path} exact={route.exact} key={route.name}>
+              <route.component routes={route.routes} />
+            </Route>
+          ))
+        }
+>>>>>>> adaaa175825da830c4a9ca866c48ef0169608f9e
       </Switch>
     </Router>
   )
