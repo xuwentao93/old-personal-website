@@ -10,13 +10,15 @@ const webpackConfig = merge(webpackBase, {
   output: {
     path: path.join(__dirname, '../dist'), // 打包后的文件存放的地方
     filename: '[name]_[hash].js'
+    // publicPath: '/dist/' //  ??? whats' this?
   },
   devtool: 'source-map',
   devServer: {
     contentBase: '../dist',
     port: 2222,
     hot: true,
-    stats: 'errors-only'
+    stats: 'errors-only',
+    historyApiFallback: true // 解决 bowserRouter 刷新的时候出现 can't get.
   },
   mode: 'development',
   plugins: [

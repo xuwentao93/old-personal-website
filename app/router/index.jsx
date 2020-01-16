@@ -1,10 +1,12 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Switch } from 'react-router-dom'
 import Home from '../pages/home'
 import Main from '../pages/main'
 import Article from '../pages/article'
 import NotFind from '../pages/404'
+import { renderRoutes } from '../utils/route'
 
+console.log(process)
 
 const routes = [
   {
@@ -35,13 +37,7 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        {
-          routes.map((route) => (
-            <Route path={route.path} exact={route.exact} key={route.name}>
-              <route.component routes={route.routes} />
-            </Route>
-          ))
-        }
+        { renderRoutes(routes) }
       </Switch>
     </Router>
   )
