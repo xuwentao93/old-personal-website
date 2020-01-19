@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import './index.less'
-import mouse from '../../../assets/main/mouse.png'
+import mouse from '@/assets/main/mouse.png'
 
 const list = [
   {
@@ -21,7 +21,7 @@ const list = [
 export default function Navigator() {
   return (
     <header className="navigator">
-      <img src={mouse} alt="no img" className="head" />
+      <img src={mouse} alt="no img" className="avatar" />
       <ul className="list">
         {
           list.map((item) => (

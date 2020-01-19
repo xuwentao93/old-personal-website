@@ -1,0 +1,41 @@
+@import './test.less';
+
+@basic-color: #49f;
+@mergeColor: darken(@basic-color, 10%);
+@test: .test;
+
+@{test} {
+  background-color: @basic-color;
+}
+
+.test-article {
+  width: 200px;
+  height: $width * 2;
+  background-color: @mergeColor;
+}
+
+.father {
+  width: 400px;
+  height: $width;
+}
+
+.child:extend(.father) {
+  // &:extend(.father);
+  color: #fff;
+  background-color: #000;
+}
+
+.list(@n, @i: 1) when (@n > @i) {
+  .list-@{i} {
+    height: @i * @base-number;
+  }
+  .list(@n, @i + 1);
+}
+
+.list(4);
+
+@media screen and (max-width: 980px) {
+  .media {
+    color: #f00;
+  }
+}

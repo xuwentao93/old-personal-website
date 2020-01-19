@@ -4,9 +4,8 @@ import Home from '../pages/home'
 import Main from '../pages/main'
 import Article from '../pages/article'
 import NotFind from '../pages/404'
-import { renderRoutes } from '../utils/route'
-
-console.log(process)
+import { renderRoutes } from '@/utils/route'
+import './index.less'
 
 const routes = [
   {
@@ -28,6 +27,11 @@ const routes = [
     ]
   },
   {
+    component: Test,
+    path: '/test',
+    name: 'test'
+  },
+  {
     component: NotFind,
     path: '*',
     name: '404'
@@ -37,18 +41,28 @@ export default function App() {
   return (
     <Router>
       <Switch>
-<<<<<<< HEAD
         { renderRoutes(routes) }
-=======
-        {
-          routes.map((route) => (
-            <Route path={route.path} exact={route.exact} key={route.name}>
-              <route.component routes={route.routes} />
-            </Route>
-          ))
-        }
->>>>>>> adaaa175825da830c4a9ca866c48ef0169608f9e
       </Switch>
     </Router>
+  )
+}
+
+const listMap = ['first', 'second', 'third', 'fourth']
+
+function Test() {
+  return (
+    <div>
+      <div className="test">this is a test div.</div>
+      <article className="test-article">this is a line about article.</article>
+      <div className="father">
+        <div className="child">this is child div(has father)</div>
+      </div>
+      {
+        listMap.map((list, index) => (
+          <div className={`list-${index}`} key={list}>{ list }</div>
+        ))
+      }
+      <div className="media">test media.</div>
+    </div>
   )
 }
