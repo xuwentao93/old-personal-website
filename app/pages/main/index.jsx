@@ -31,14 +31,15 @@ function Main() {
       <div className="left">
         <Toy />
       </div>
-      <div className="center">
-        <Situation />
-        <Articles />
-      </div>
       <div className="right">
         <Recommond />
         <Recently />
       </div>
+      <div className="center">
+        <Situation />
+        <Articles />
+      </div>
+
     </div>
   )
 }

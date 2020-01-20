@@ -1,3 +1,35 @@
+@import "../../../styles/utils.less";
+
 .recommond {
-  color: #f00
+  height: 280px;
+  padding: 20px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  background-color: #fff;
+
+  .title {
+    margin: 10px;
+    border-bottom: 1px solid #99a;
+  }
+
+  .recommond-img-container {
+    position: relative; // for child element(absoute).
+    height: 202px;
+
+    .recommond-img {
+      width: 100%;
+      height: inherit;
+    }
+
+    .img-shadow {
+      .setTextLine(30px);
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      padding-left: 12px;
+      font-size: 15px;
+      background-color: rgba(0, 0, 0, .3);
+      color: rgba(255, 255, 255, .9);
+    }
+  }
 }

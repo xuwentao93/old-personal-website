@@ -1,3 +1,33 @@
+@import '../../../styles/utils.less';
+
+@typeList-search-same-height: 20px;
+
 .articles {
-  color: #f00
+  padding: 0 20px 20px 20px;
+  margin-top: 40px;
+  background-color: #fff;
+}
+
+.menu-list {
+  .clearFloat();
+  line-height: 20px;
+
+  .type-list {
+    float: left;
+
+    .article-type {
+      padding: @typeList-search-same-height;
+      margin: 0 20px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .search {
+    position: relative;
+    top: @typeList-search-same-height;
+    float: right;
+  }
 }

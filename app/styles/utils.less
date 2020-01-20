@@ -1,0 +1,23 @@
+.fixed00() {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.textCenter(@height) {
+  text-align: center;
+  line-height: @height;
+}
+
+.clearFloat() {
+  &::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+
+.setTextLine(@height) {
+  height: @height;
+  line-height: @height;
+}
