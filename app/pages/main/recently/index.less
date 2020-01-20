@@ -1,3 +1,48 @@
+@import "../../../styles/utils.less";
+
 .recently {
-  color: #f00
+  padding: 20px;
+  margin-top: 40px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  background-color: #fff;
+
+  .title {
+    margin: 10px 0;
+    border-bottom: 1px solid #99a;
+  }
+}
+
+.recently-article-link {
+  width: 100%;
+  margin-bottom: 20px;
+
+  .recently-article-title {
+    color: #49f;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .recently-article-text {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .recently-article-brief {
+    .clearFloat();
+
+    .recently-article-type {
+      float: left;
+      color: #ff0068;
+    }
+
+    .recently-article-time {
+      float: right;
+      color: #b71ed7;
+    }
+  }
 }

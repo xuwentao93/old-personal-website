@@ -62,14 +62,14 @@ export default function Home() {
             />
           </a>
           <a
-            href="https://weibo.com/u/6208673764/home?wvr=5&sudaref=graph.qq.com"
+            href="https://www.zhihu.com/people/pie-dao-chuan-95-49"
             target="_blank"
             rel="noreferrer noopener"
-            title="sina/文韬武略"
+            title="zhihu/氕氘氚"
           >
             <img
-              src="https://www.weibo.com/favicon.ico"
-              alt="my sina homepage"
+              src="https://static.zhihu.com/static/favicon.ico"
+              alt="my zhihu homepage"
               className="icon"
             />
           </a>
