@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import './index.less'
-import test from '@/assets/main/recommond/test.jpg'
+import { getArticleMsg } from '@/api/article'
+// import test from '@/assets/main/recommond/test.jpg'
 
 const types = [
   {
@@ -21,55 +22,16 @@ const types = [
   }
 ]
 
-const articleList = [
-  {
-    title: '这是一篇关于技术的文章',
-    img: test,
-    text: '积分卡死啦荆防颗粒时代峻峰考虑到时间啊 const hello world abs what where when... fdasfd fdfd asd f',
-    type: '技术',
-    watch: 1,
-    thumbsUp: 0,
-    time: '2019-01-01'
-  },
-  {
-    title: '这是一篇关于生活的文章',
-    img: undefined,
-    text: '积分卡死啦荆防颗粒时代峻峰考虑到时间啊 const hello world abs what where when... fdasfd fdfd asd f',
-    type: '生活',
-    watch: 1,
-    thumbsUp: 0,
-    time: '2019-05-02'
-  },
-  {
-    title: '这是一篇关于游戏的文章',
-    img: undefined,
-    text: '积分卡死啦荆防颗粒时代峻峰考虑到时间啊 const hello world abs what where when... fdasfd fdfd asd f',
-    type: '游戏',
-    watch: 1,
-    thumbsUp: 0,
-    time: '2019-02-01'
-  },
-  {
-    title: '这是一篇关于技术的文章',
-    img: undefined,
-    text: '积分卡死啦荆防颗粒时代峻峰考虑到时间啊 const hello world abs what where when... fdasfd fdfd asd f',
-    type: '技术',
-    watch: 1,
-    thumbsUp: 0,
-    time: '2019-01-05'
-  },
-  {
-    title: '这是一篇关于技术的文章',
-    img: undefined,
-    text: '积分卡死啦荆防颗粒时代峻峰考虑到时间啊 const hello world abs what where when... fdasfd fdfd asd f',
-    type: '技术',
-    watch: 1,
-    thumbsUp: 0,
-    time: '2019-01-06'
-  }
-]
-
 export default function Articles() {
+  const [articleList, setArticleList] = useState([])
+  useEffect(() => {
+    getArticleMsg()
+      .then((res) => {
+        setArticleList(res.data.result)
+      })
+      .catch((err) => console.log('err comes from getArticleMsg api: ' + err))
+  }, [])
+
   return (
     <div className="articles">
       <div className="menu-list">
@@ -88,14 +50,20 @@ export default function Articles() {
         {
           articleList.map((article) => (
             <li className="article" key={`${article.title}${article.time}`}>
+              { article.img && <img src={article.img} alt="can't find img" className="article-img" /> }
               <h3>
                 <span className="type">{ article.type }</span>
                 <span className="title">{ article.title }</span>
               </h3>
-              { article.img && <img src={article.img} alt="can't find img" className="article-img" /> }
               <div className="text">{ article.text }</div>
               <div className="brief">
-                <span>{ article.time }</span>
+                <span className="time">{ article.time }</span>
+                <span className="article-evaluate">
+                  <i className="fa fa-eye"></i>
+                  <span className="number">{ article.views }</span>
+                  <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                  <span className="number">{ article.thumbsUp }</span>
+                </span>
               </div>
             </li>
           ))

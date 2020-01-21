@@ -63,6 +63,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer noopener"
                 title={item.title}
+                key={item.href}
               >
                 <img
                   src={item.src}

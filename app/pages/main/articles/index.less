@@ -1,7 +1,5 @@
 @import '../../../styles/utils.less';
 
-@type-button-line-height: 60px;
-
 .articles {
   padding: 0 20px 20px 20px;
   margin-top: 40px;
@@ -9,10 +7,9 @@
 
 .menu-list {
   .clearFloat();
+  .setTextLine(60px);
   padding-right: 20px;
   margin-bottom: 20px;
-  height: @type-button-line-height;
-  line-height: @type-button-line-height;
   background-color: #000;
 
   .type-list {
@@ -44,14 +41,17 @@
 
 .article {
   padding: 10px 20px;
-  border: 1px solid #899;
+  border: 1px solid #ccc;
+  background-color: #fff;
   
   .type {
     display: inline-block;
     margin-right: 8px;
-    padding: 0 8px;
-    border: 1px solid #aae;
-    color: #b71ed7;
+    padding: 4px 17px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #fff;
     background-color: #49f;
   }
 
@@ -61,18 +61,35 @@
 
   .article-img {
     float: right;
-    position: relative;
-    top: -20px;
     height: 100px;
     width: 100px;
   }
 
   .text {
     margin-bottom: 12px;
-    font-size: 15px;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: Consolas, -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, PingFang SC;
+    color: #b2bac2
   }
 
   .brief {
     font-size: 16px;
+
+    .time {
+      color: #f00;
+    }
+
+    .article-evaluate {
+      position: relative;
+      left: 40%;
+
+    }
+
+    .fa {
+      display: inline-block;
+      margin: 0 10px;
+    }
+
   }
 }

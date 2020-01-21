@@ -1,7 +1,12 @@
-.fixed00() {
+@cover-index: 9999;
+@navigation-index: 999;
+@high-index: 99;
+
+.navigation() {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: @navigation-index;
 }
 
 .textCenter(@height) {
