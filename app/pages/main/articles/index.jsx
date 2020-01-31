@@ -1,37 +1,70 @@
+/* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react'
 import './index.less'
-import { getArticleMsg } from '@/api/article'
+import { getArticleMsg, getArticleName } from '@/api/article'
+// eslint-disable-next-line import/no-unresolved
+import Input from '@/components/Input'
 // import test from '@/assets/main/recommond/test.jpg'
 
+const articleTypeHover = 'article-type-hover'
 const types = [
   {
     type: 'all',
-    label: '全部'
+    label: '全部',
+    hover: articleTypeHover
   },
   {
     type: 'tech',
-    label: '技术'
+    label: '技术',
+    hover: undefined
   },
   {
     type: 'game',
-    label: '游戏'
+    label: '游戏',
+    hover: undefined
   },
   {
     type: 'life',
-    label: '生活'
+    label: '生活',
+    hover: undefined
   }
 ]
 
-const articleTypeHoverList = new Array(4).fill(undefined)
-function tt() {
-  console.log(1)
-}
-articleTypeHoverList[0] = 'article-type-hover'
-
 export default function Articles() {
   const [articleList, setArticleList] = useState([])
+  const [articleTypeHoverList, setArticleTypeHoverList] = useState(types.map((type, index) => {
+    if (index === 0) return articleTypeHover
+    return undefined
+  }))
+  const [articleNameValue, setArticleNameValue] = useState('')
+  const methods = {
+    setType(index) {
+      const copyList = types.map(() => undefined)
+      copyList[index] = articleTypeHover
+      setArticleTypeHoverList(copyList)
+      getArticleMsg({
+        type: types[index].type
+      })
+        .then((res) => {
+          setArticleList(res.data.result)
+        })
+        .catch((err) => console.log('err comes from getArticleMsg api: ' + err))
+    },
+    setArticleNameValue(event) {
+      setArticleNameValue(event.target.value)
+      getArticleName({
+        name: event.target.value
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((err) => console.log('err comes from getArticleName api:' + err))
+    }
+  }
   useEffect(() => {
-    getArticleMsg()
+    getArticleMsg({
+      type: 'all'
+    })
       .then((res) => {
         setArticleList(res.data.result)
       })
@@ -48,14 +81,18 @@ export default function Articles() {
                 key={type.type}
                 type={type.type}
                 className={`article-type ${articleTypeHoverList[index]}`}
-                onClick={tt}
+                onClick={() => methods.setType(index)}
               >
+                { type.label }
               </li>
             ))
           }
         </ul>
         <div className="search">
-          <input type="text" />
+          <Input
+            value={articleNameValue}
+            onChange={methods.setArticleNameValue}
+          />
         </div>
       </div>
       <ul className="article-list">
@@ -64,7 +101,7 @@ export default function Articles() {
             <li className="article" key={`${article.title}${article.time}`}>
               { article.img && <img src={article.img} alt="can't find img" className="article-img" /> }
               <h3>
-                <span className="type">{ article.type }</span>
+                <span className="type">{ article.label }</span>
                 <span className="title">{ article.title }</span>
               </h3>
               <div className="text">{ article.text }</div>

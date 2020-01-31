@@ -14,6 +14,7 @@
 
   .type-list {
     float: left;
+    width: 392px;
 
     .article-type {
       .setTextLine(28px);
@@ -40,6 +41,13 @@
 
   .search {
     float: right;
+    width: calc(92% - 392px);
+  }
+
+  @media screen and (max-width: 1650px) {
+    .search {
+      display: none;
+    }
   }
 }
 
