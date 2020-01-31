@@ -22,6 +22,12 @@ const types = [
   }
 ]
 
+const articleTypeHoverList = new Array(4).fill(undefined)
+function tt() {
+  console.log(1)
+}
+articleTypeHoverList[0] = 'article-type-hover'
+
 export default function Articles() {
   const [articleList, setArticleList] = useState([])
   useEffect(() => {
@@ -37,8 +43,14 @@ export default function Articles() {
       <div className="menu-list">
         <ul className="type-list">
           {
-            types.map((type) => (
-              <li key={type.type} type={type.type} className="article-type">{ type.label }</li>
+            types.map((type, index) => (
+              <li
+                key={type.type}
+                type={type.type}
+                className={`article-type ${articleTypeHoverList[index]}`}
+                onClick={tt}
+              >
+              </li>
             ))
           }
         </ul>

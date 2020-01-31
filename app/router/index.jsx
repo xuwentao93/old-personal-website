@@ -4,6 +4,7 @@ import Home from '../pages/home'
 import Main from '../pages/main'
 import Article from '../pages/article'
 import NotFind from '../pages/404'
+import Test from './test'
 import { renderRoutes } from '@/utils/route'
 import './index.less'
 
@@ -44,25 +45,5 @@ export default function App() {
         { renderRoutes(routes) }
       </Switch>
     </Router>
-  )
-}
-
-const listMap = ['first', 'second', 'third', 'fourth']
-
-function Test() {
-  return (
-    <div>
-      <div className="test">this is a test div.</div>
-      <article className="test-article">this is a line about article.</article>
-      <div className="father">
-        <div className="child">this is child div(has father)</div>
-      </div>
-      {
-        listMap.map((list, index) => (
-          <div className={`list-${index}`} key={list}>{ list }</div>
-        ))
-      }
-      <div className="media">test media.</div>
-    </div>
   )
 }

@@ -25,12 +25,16 @@
       color: #ddd;
 
       &:hover {
-        border-top-color: #d18e59;
-        color: #5e068c;
-        background-color: #fff;
-        transition: color .3s, background-color .3s, border-color .3s;
-        cursor: pointer;
+        .article-type-hover();
       }
+    }
+
+    .article-type-hover {
+      border-top-color: #d18e59;
+      color: #5e068c;
+      background-color: #fff;
+      transition: color .3s, background-color .3s, border-color .3s;
+      cursor: pointer;
     }
   }
 
