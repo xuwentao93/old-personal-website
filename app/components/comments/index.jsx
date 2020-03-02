@@ -1,5 +1,5 @@
-import React from 'react'
-import './index.less'
+import React from 'react';
+// import './index.less';
 // import { getCommontsList } from '@/api/comment'
 
 const test = [
@@ -11,16 +11,16 @@ const test = [
     user: 'b',
     comment: 'huhuhu'
   }
-]
+];
 
 export default function Footer() {
   return (
     <div className="footer">
       {
-        test.map((comment) => (
+        test.map(() => (
           <div className="article-comment"></div>
         ))
       }
     </div>
-  )
+  );
 }

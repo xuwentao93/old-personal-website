@@ -1,5 +1,5 @@
-import React from 'react'
-import './index.less'
+import React from 'react';
+import './index.less';
 
 export default function Situation() {
   return (
@@ -16,5 +16,5 @@ export default function Situation() {
         <span className="time">2019-01-01</span>
       </div>
     </div>
-  )
+  );
 }

@@ -54,7 +54,7 @@ input {
 }
 
 /* 定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸 */
-/* 最后还是应该用div去写 */
+/* 最后还是应该用 div 去写 */
 ::-webkit-scrollbar {
   width: 8px;
   padding: 10px;

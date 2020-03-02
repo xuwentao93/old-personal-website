@@ -71,7 +71,7 @@ module.exports = {
       template: path.join(__dirname, '../app/index.html'),
       filename: 'index.html',
       inject: true,
-      favicon: './favicon.ico',
+      // favicon: './favicon.ico',
       minify: {
         html5: true,
         collapseWhitespace: true,

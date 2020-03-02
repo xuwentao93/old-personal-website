@@ -1,5 +1,5 @@
-import React from 'react'
-import './index.less'
+import React from 'react';
+import './index.less';
 // import { getCommontsList } from '@/api/comment'
 
 const test = [
@@ -13,7 +13,7 @@ const test = [
     comment: '另外，建议老师以后发视频到B站。。0时间广告等待。 YOUKU 这种 40 秒广告太可怕了。。',
     time: '2019-11-11 15:55'
   }
-]
+];
 
 export default function Footer() {
   return (
@@ -30,5 +30,5 @@ export default function Footer() {
         }
       </div>
     </div>
-  )
+  );
 }

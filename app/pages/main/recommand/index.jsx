@@ -1,6 +1,6 @@
-import React from 'react'
-import './index.less'
-import testImg from '@/assets/main/recommond/test.jpg'
+import React from 'react';
+import './index.less';
+import testImg from '@/assets/main/recommond/test.jpg';
 
 export default function Recommond() {
   return (
@@ -11,5 +11,5 @@ export default function Recommond() {
         <div className="img-shadow">这是一段测试文字</div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,7 +1,7 @@
-import React from 'react'
-import './index.less'
+import React from 'react';
+import './index.less';
 
-const listMap = ['first', 'second', 'third', 'fourth']
+const listMap = ['first', 'second', 'third', 'fourth'];
 
 // const ws = new WebSocket('ws://localhost:3000/test')
 // // 响应onmessage事件:
@@ -28,5 +28,5 @@ export default function Test() {
       }
       <div className="media">test media.</div>
     </div>
-  )
+  );
 }

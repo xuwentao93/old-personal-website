@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import './index.less'
-import { getArticleMsg } from '@/api/article'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './index.less';
+import { getArticleMsg } from '@/api/article';
 
 export default function Recently() {
-  const [articleList, setArticleList] = useState([])
+  const [articleList, setArticleList] = useState([]);
   useEffect(() => {
     getArticleMsg({
       type: 'all'
     })
       .then((res) => {
-        setArticleList(res.data.result)
+        setArticleList(res.data.result);
       })
-      .catch((err) => console.log('err comes from getArticleMsg api: ' + err))
-  }, [])
+      .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
+  }, []);
   return (
     <div className="recently">
       <h3 className="title">近期文章</h3>
@@ -32,5 +32,5 @@ export default function Recently() {
         }
       </ul>
     </div>
-  )
+  );
 }
