@@ -1,9 +1,9 @@
-const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const path = require('path')
-const merge = require('webpack-merge')
-const OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin')
-const webpackBase = require('./webpack.base')
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const merge = require('webpack-merge');
+const OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
+const webpackBase = require('./webpack.base');
 
 const webpackConfig = merge(webpackBase, {
   entry: path.join(__dirname, '../app/main.js'), // 已多次提及的唯一入口文件
@@ -38,6 +38,6 @@ const webpackConfig = merge(webpackBase, {
     }),
     new OpenBrowserWebpackPlugin({ url: 'http://localhost:2222' })
   ]
-})
+});
 
-module.exports = webpackConfig
+module.exports = webpackConfig;

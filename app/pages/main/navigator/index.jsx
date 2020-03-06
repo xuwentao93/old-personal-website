@@ -1,7 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import './index.less'
-import mouse from '@/assets/main/mouse.png'
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './index.less';
+import mouse from '@/assets/main/mouse.png';
 
 const list = [
   {
@@ -16,7 +16,7 @@ const list = [
     label: '日记',
     to: '/dict'
   }
-]
+];
 
 export default function Navigator() {
   return (
@@ -30,5 +30,5 @@ export default function Navigator() {
         }
       </ul>
     </header>
-  )
+  );
 }

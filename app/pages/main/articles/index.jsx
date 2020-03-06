@@ -1,12 +1,12 @@
 /* eslint-disable no-restricted-syntax */
-import React, { useState, useEffect } from 'react'
-import './index.less'
-import { getArticleMsg, getArticleName } from '@/api/article'
+import React, { useState, useEffect } from 'react';
+import './index.less';
+import { getArticleMsg, getArticleName } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
-import Input from '@/components/Input'
+import Input from '@/components/Input';
 // import test from '@/assets/main/recommond/test.jpg'
 
-const articleTypeHover = 'article-type-hover'
+const articleTypeHover = 'article-type-hover';
 const types = [
   {
     type: 'all',
@@ -28,48 +28,48 @@ const types = [
     label: '生活',
     hover: undefined
   }
-]
+];
 
 export default function Articles() {
-  const [articleList, setArticleList] = useState([])
+  const [articleList, setArticleList] = useState([]);
   const [articleTypeHoverList, setArticleTypeHoverList] = useState(types.map((type, index) => {
-    if (index === 0) return articleTypeHover
-    return undefined
-  }))
-  const [articleNameValue, setArticleNameValue] = useState('')
+    if (index === 0) return articleTypeHover;
+    return undefined;
+  }));
+  const [articleNameValue, setArticleNameValue] = useState('');
   const methods = {
-    setType(index) {
-      const copyList = types.map(() => undefined)
-      copyList[index] = articleTypeHover
-      setArticleTypeHoverList(copyList)
+    setType(index) { // 根据类型选择文章列表.
+      const copyList = types.map(() => undefined);
+      copyList[index] = articleTypeHover;
+      setArticleTypeHoverList(copyList);
       getArticleMsg({
         type: types[index].type
       })
         .then((res) => {
-          setArticleList(res.data.result)
+          setArticleList(res.data.result);
         })
-        .catch((err) => console.log('err comes from getArticleMsg api: ' + err))
+        .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
     },
     setArticleNameValue(event) {
-      setArticleNameValue(event.target.value)
+      setArticleNameValue(event.target.value);
       getArticleName({
         name: event.target.value
       })
         .then((res) => {
-          console.log(res)
+          console.log(res);
         })
-        .catch((err) => console.log('err comes from getArticleName api:' + err))
+        .catch((err) => console.log('err comes from getArticleName api:' + err));
     }
-  }
+  };
   useEffect(() => {
     getArticleMsg({
       type: 'all'
     })
       .then((res) => {
-        setArticleList(res.data.result)
+        setArticleList(res.data.result);
       })
-      .catch((err) => console.log('err comes from getArticleMsg api: ' + err))
-  }, [])
+      .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
+  }, []);
 
   return (
     <div className="articles">
@@ -119,5 +119,5 @@ export default function Articles() {
         }
       </ul>
     </div>
-  )
+  );
 }

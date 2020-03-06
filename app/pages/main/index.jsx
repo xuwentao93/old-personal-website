@@ -1,15 +1,15 @@
-import React from 'react'
-import { Switch, Route } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import './index.less'
-import Navigator from './navigator'
-import Footer from './footer'
-import Toy from './toy'
-import Situation from './situation'
-import Articles from './articles'
-import Recommond from './recommand'
-import Recently from './recently'
-import { renderRoutes } from '@/utils/route'
+import React from 'react';
+import { Switch, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import './index.less';
+import Navigator from './navigator';
+import Footer from './footer';
+import Toy from './toy';
+import Situation from './situation';
+import Articles from './articles';
+import Recommond from './recommand';
+import Recently from './recently';
+import { renderRoutes } from '@/utils/route';
 
 export default function Container({ routes }) {
   return (
@@ -22,7 +22,7 @@ export default function Container({ routes }) {
       </Switch>
       <Footer />
     </>
-  )
+  );
 }
 
 function Main() {
@@ -41,9 +41,9 @@ function Main() {
       </div>
 
     </div>
-  )
+  );
 }
 
 Container.propTypes = {
   routes: PropTypes.array.isRequired
-}
+};

@@ -1,6 +1,6 @@
-import React from 'react'
-import './index.less'
-import editorImg from '@/assets/main/toy/editor.jpg'
+import React from 'react';
+import './index.less';
+import editorImg from '@/assets/main/toy/editor.jpg';
 
 const toys = [
   {
@@ -8,7 +8,7 @@ const toys = [
     img: editorImg,
     title: '文本编辑器'
   }
-]
+];
 
 
 export default function Toy() {
@@ -23,5 +23,5 @@ export default function Toy() {
         ))
       }
     </div>
-  )
+  );
 }

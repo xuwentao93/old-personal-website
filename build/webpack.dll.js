@@ -1,5 +1,5 @@
-const path = require('path')
-const webpack = require('webpack')
+const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: {
@@ -24,4 +24,4 @@ module.exports = {
       path: path.join(__dirname, '../static/[name].json')
     })
   ]
-}
+};

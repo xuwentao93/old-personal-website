@@ -1,8 +1,8 @@
-const path = require('path')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const webpack = require('webpack')
 // Notice me! please use image-webpack-plugin to minify images' size.
 
@@ -71,7 +71,7 @@ module.exports = {
       template: path.join(__dirname, '../app/index.html'),
       filename: 'index.html',
       inject: true,
-      favicon: './favicon.ico',
+      // favicon: './favicon.ico',
       minify: {
         html5: true,
         collapseWhitespace: true,
@@ -86,4 +86,4 @@ module.exports = {
     //   manifest: require('../static/library.json')
     // })
   ]
-}
+};

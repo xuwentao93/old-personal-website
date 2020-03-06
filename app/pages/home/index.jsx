@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
-import './index.less'
-import koala from '@/assets/home/koala.jpg'
-import panda from '@/assets/home/panda.jpg'
-import puppy from '@/assets/home/puppy.jpg'
-import kitty from '@/assets/home/kitty.jpg'
-import sheeps from '@/assets/home/sheeps.jpg'
-import alpaca from '@/assets/home/alpaca.jpg'
+import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
+import './index.less';
+import koala from '@/assets/home/koala.jpg';
+import panda from '@/assets/home/panda.jpg';
+import puppy from '@/assets/home/puppy.jpg';
+import kitty from '@/assets/home/kitty.jpg';
+import sheeps from '@/assets/home/sheeps.jpg';
+import alpaca from '@/assets/home/alpaca.jpg';
 
-let index = 1
-const imgList = [alpaca, koala, panda, puppy, sheeps, kitty]
+let index = 1;
+const imgList = [alpaca, koala, panda, puppy, sheeps, kitty];
 
 const selfComunity = [
   {
@@ -36,18 +36,18 @@ const selfComunity = [
     src: 'https://static.zhihu.com/static/favicon.ico',
     alt: 'my zhihu homepage'
   }
-]
+];
 
 export default function Home() {
-  const home = useRef()
+  const home = useRef();
   useEffect(() => {
-    const { style } = home.current
-    style.backgroundImage = `url(${imgList[0]})`
+    const { style } = home.current;
+    style.backgroundImage = `url(${imgList[0]})`;
     setInterval(() => {
-      style.backgroundImage = `url(${imgList[index++]})`
-      if (index === 6) index = 0 // pay attention there! Index is not 5!!!
-    }, 5000)
-  })
+      style.backgroundImage = `url(${imgList[index++]})`;
+      if (index === 6) index = 0; // pay attention there! Index is not 5!!!
+    }, 5000);
+  });
   return (
     <div className="home" ref={home}>
       <div className="personal-profile">
@@ -76,5 +76,5 @@ export default function Home() {
         </p>
       </div>
     </div>
-  )
+  );
 }
