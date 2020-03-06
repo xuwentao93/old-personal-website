@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './index.less';
+import './pc.less';
+import './mobile.less';
 import koala from '@/assets/home/koala.jpg';
 import panda from '@/assets/home/panda.jpg';
 import puppy from '@/assets/home/puppy.jpg';
