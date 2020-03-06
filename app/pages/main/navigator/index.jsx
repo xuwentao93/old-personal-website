@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './index.less';
+import './pc.less';
+import './mobile.less';
 import mouse from '@/assets/main/mouse.png';
 
 const list = [
