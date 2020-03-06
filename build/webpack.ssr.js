@@ -1,11 +1,11 @@
-const webpack = require('webpack')
-const path = require('path')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
-const cssnano = require('cssnano')
-const merge = require('webpack-merge')
-const webpackBase = require('./webpack.base')
+const webpack = require('webpack');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const cssnano = require('cssnano');
+const merge = require('webpack-merge');
+const webpackBase = require('./webpack.base');
 
 module.exports = merge(webpackBase, {
   entry: path.join(__dirname, '../app/main-server.js'),
@@ -45,4 +45,4 @@ module.exports = merge(webpackBase, {
     }),
     new CleanWebpackPlugin()
   ]
-})
+});
