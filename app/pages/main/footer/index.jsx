@@ -1,5 +1,6 @@
 import React from 'react';
-import './index.less';
+import './pc.less';
+import './mobile.less';
 // import { getCommontsList } from '@/api/comment'
 
 const test = [

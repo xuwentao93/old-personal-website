@@ -1,0 +1,47 @@
+@media screen and (max-width: 700px) {
+  .situation {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px #e2e2e2;
+    background-color: #fff;
+  
+    .title {
+      font-size: 20px;
+      color: #49f;
+    
+      &:hover {
+        color: #7af;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
+    
+    .text {
+      margin: 17px 0;
+      line-height: 24px;
+      font-size: 14px;
+    }
+    
+    .brief {
+      height: 20px;
+      font-size: 13px;
+      color: #99a;
+    
+      &::after {
+        content: '';
+        display: block;
+        clear: both;
+      }
+    
+      .sort-name {
+        float: left;
+      }
+      
+      .time {
+        float: right;
+      }
+    }
+    
+  }
+  
+}

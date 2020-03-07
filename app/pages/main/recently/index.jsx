@@ -5,9 +5,11 @@ import { getArticleMsg } from '@/api/article';
 
 export default function Recently() {
   const [articleList, setArticleList] = useState([]);
+  const media = window.innerWidth > 700 ? 'pc' : 'mobile';
   useEffect(() => {
     getArticleMsg({
-      type: 'all'
+      current: true,
+      media
     })
       .then((res) => {
         setArticleList(res.data.result);

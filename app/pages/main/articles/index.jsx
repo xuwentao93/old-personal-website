@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
-import './index.less';
+import './pc.less';
+import './mobile.less';
 import { getArticleMsg, getArticleName } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
 import Input from '@/components/Input';

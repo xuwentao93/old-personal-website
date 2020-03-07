@@ -9,8 +9,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   resolve: {
     alias: {
-      // react: path.resolve(__dirname, '../node_modules/react/umd/react.production.min.js'),
-      // 'react-dom': path.resolve(__dirname, '../node_modules/react-dom/umd/react-dom.production.min.js'),
       '@': path.resolve(__dirname, '../app/')
     },
     extensions: ['.js', '.jsx']
@@ -71,7 +69,7 @@ module.exports = {
       template: path.join(__dirname, '../app/index.html'),
       filename: 'index.html',
       inject: true,
-      // favicon: './favicon.ico',
+      favicon: './bighead.ico',
       minify: {
         html5: true,
         collapseWhitespace: true,

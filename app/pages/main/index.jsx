@@ -1,7 +1,8 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './index.less';
+import './pc.less';
+import './mobile.less';
 import Navigator from './navigator';
 import Footer from './footer';
 import Toy from './toy';
@@ -26,20 +27,31 @@ export default function Container({ routes }) {
 }
 
 function Main() {
+  const width = window.innerWidth;
+  console.log(width);
+  if (width > 700) {
+    return (
+      <div className="main">
+        <div className="left">
+          <Toy />
+        </div>
+        <div className="right">
+          <Recommond />
+          <Recently />
+        </div>
+        <div className="center">
+          <Situation />
+          <Articles />
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="main">
-      <div className="left">
-        <Toy />
-      </div>
-      <div className="right">
-        <Recommond />
-        <Recently />
-      </div>
-      <div className="center">
-        <Situation />
-        <Articles />
-      </div>
-
+      <Situation />
+      <Recommond />
+      <Recently />
+      <Articles />
     </div>
   );
 }

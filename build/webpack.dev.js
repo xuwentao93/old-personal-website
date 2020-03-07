@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const merge = require('webpack-merge');
 const OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
@@ -23,19 +22,6 @@ const webpackConfig = merge(webpackBase, {
   mode: 'development',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../app/index.html'),
-      filename: 'index.html',
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
     new OpenBrowserWebpackPlugin({ url: 'http://localhost:2222' })
   ]
 });

@@ -26,7 +26,7 @@ const webpackConfig = merge(webpackBase, {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // new OptimizeCssAssetsWebpackPlugin({
+    // new OptimizeCssAssetsWebpackPlugin({ // css 压缩导致打包报错 exit code: 1.
     //   assetNameRegExp: /\.css$/g,
     //   cssProcessor: cssnano
     // }),
