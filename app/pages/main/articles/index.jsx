@@ -1,11 +1,15 @@
-/* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { Button } from 'antd';
 import './pc.less';
 import './mobile.less';
-import { getArticleMsg, getArticleName } from '@/api/article';
+// import 'antd/es/button/style/css';
+import { getArticleMsgApi } from '@/models/actions/getArticles';
+import { getArticleName } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
 import Input from '@/components/Input';
-// import test from '@/assets/main/recommond/test.jpg'
+
 
 const articleTypeHover = 'article-type-hover';
 const types = [
@@ -31,7 +35,8 @@ const types = [
   }
 ];
 
-export default function Articles() {
+// eslint-disable-next-line object-curly-newline
+function Articles({ typeArticleList, typeArticleApi }) {
   const [articleList, setArticleList] = useState([]);
   const [articleTypeHoverList, setArticleTypeHoverList] = useState(types.map((type, index) => {
     if (index === 0) return articleTypeHover;
@@ -43,13 +48,15 @@ export default function Articles() {
       const copyList = types.map(() => undefined);
       copyList[index] = articleTypeHover;
       setArticleTypeHoverList(copyList);
-      getArticleMsg({
-        type: types[index].type
-      })
-        .then((res) => {
-          setArticleList(res.data.result);
-        })
-        .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
+      // getArticleMsg({
+      //   type: types[index].type
+      // })
+      //   .then((res) => {
+      //     setArticleList(res.data.result);
+      //   })
+      //   .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
+      typeArticleApi(types[index].type);
+      setArticleList(typeArticleList);
     },
     setArticleNameValue(event) {
       setArticleNameValue(event.target.value);
@@ -63,13 +70,9 @@ export default function Articles() {
     }
   };
   useEffect(() => {
-    getArticleMsg({
-      type: 'all'
-    })
-      .then((res) => {
-        setArticleList(res.data.result);
-      })
-      .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
+    typeArticleApi('all');
+    console.log(typeArticleList);
+    setArticleList(typeArticleList);
   }, []);
 
   return (
@@ -109,10 +112,14 @@ export default function Articles() {
               <div className="brief">
                 <span className="time">{ article.time }</span>
                 <span className="article-evaluate">
-                  <i className="fa fa-eye"></i>
-                  <span className="number">{ article.views }</span>
-                  <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                  <span className="number">{ article.thumbsUp }</span>
+                  <Button>
+                    <i className="fa fa-eye" aria-hidden="true"></i>
+                    <span className="number">{ article.views }</span>
+                  </Button>
+                  <Button>
+                    <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    <span className="number">{ article.thumbsUp }</span>
+                  </Button>
                 </span>
               </div>
             </li>
@@ -122,3 +129,20 @@ export default function Articles() {
     </div>
   );
 }
+
+const getArticleList = (state) => {
+  const { typeArticleList } = state;
+  console.log(state);
+  return { typeArticleList };
+};
+
+const setArticleList = (dispatch) => ({
+  typeArticleApi: (type) => dispatch(getArticleMsgApi({ type }))
+});
+
+Articles.propTypes = {
+  typeArticleList: PropTypes.object.isRequired,
+  typeArticleApi: PropTypes.func.isRequired
+};
+
+export default (connect(getArticleList, setArticleList))(Articles);
