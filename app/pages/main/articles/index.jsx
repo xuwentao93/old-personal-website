@@ -1,8 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
+import { Button } from 'antd';
 import './pc.less';
 import './mobile.less';
 import { getArticleMsg, getArticleName } from '@/api/article';
+import { test } from '@/api/test';
 // eslint-disable-next-line import/no-unresolved
 import Input from '@/components/Input';
 // import test from '@/assets/main/recommond/test.jpg'
@@ -60,6 +62,16 @@ export default function Articles() {
           console.log(res);
         })
         .catch((err) => console.log('err comes from getArticleName api:' + err));
+    },
+    test() {
+      test({
+        string: 'string',
+        number: 1
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.log('err comes from test api:' + err));
     }
   };
   useEffect(() => {
@@ -70,6 +82,7 @@ export default function Articles() {
         setArticleList(res.data.result);
       })
       .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
+    methods.test();
   }, []);
 
   return (
@@ -109,10 +122,14 @@ export default function Articles() {
               <div className="brief">
                 <span className="time">{ article.time }</span>
                 <span className="article-evaluate">
-                  <i className="fa fa-eye"></i>
-                  <span className="number">{ article.views }</span>
-                  <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
-                  <span className="number">{ article.thumbsUp }</span>
+                  <Button>
+                    <i className="fa fa-eye" aria-hidden="true"></i>
+                    <span className="number">{ article.views }</span>
+                  </Button>
+                  <Button>
+                    <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    <span className="number">{ article.thumbsUp }</span>
+                  </Button>
                 </span>
               </div>
             </li>
