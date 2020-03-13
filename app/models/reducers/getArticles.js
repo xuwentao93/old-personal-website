@@ -1,13 +1,28 @@
 import { CURRENT, TYPE } from '../actions/getArticles';
 
-export default function getArticleMsgApi(state, action) {
+const s = {
+  data: []
+};
+export function typeArticleList(state = s, action) {
   switch (action.type) {
-    case CURRENT:
+    case TYPE:
+      console.log(action);
       return {
         ...state,
         data: action.data
       };
-    case TYPE:
+    default:
+      return {
+        ...state
+      };
+  }
+}
+
+export function currentArticleList(state = {
+  data: null
+}, action) {
+  switch (action.type) {
+    case CURRENT:
       return {
         ...state,
         data: action.data

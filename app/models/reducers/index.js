@@ -1,8 +1,9 @@
 import { combineReducers } from 'redux';
-import articleList from './getArticles';
+import { typeArticleList, currentArticleList } from './getArticles';
 
 const rootReducer = combineReducers({
-  articleList
+  typeArticleList,
+  currentArticleList
 });
 
 export default rootReducer;

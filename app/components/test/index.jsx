@@ -8,7 +8,9 @@ import { getArticleMsgApi } from '@/models/actions/getArticles';
 function Test({ articleList, getArticleMsgApi }) {
   const methods = {
     testApi() {
-      getArticleMsgApi('all');
+      getArticleMsgApi({
+        type: 'all'
+      });
     }
   };
   useEffect(() => {
@@ -26,7 +28,9 @@ const getArticleList = (state) => {
 };
 
 const setArticleList = (dispatch) => ({
-  getArticleMsgApi: () => dispatch(getArticleMsgApi('all'))
+  getArticleMsgApi: () => dispatch(getArticleMsgApi({
+    type: 'all'
+  }))
 });
 
 Test.propTypes = {
