@@ -3,11 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { Button } from 'antd';
 import './pc.less';
 import './mobile.less';
+import 'antd/es/button/style/css';
 import { getArticleMsg, getArticleName } from '@/api/article';
-import { test } from '@/api/test';
 // eslint-disable-next-line import/no-unresolved
 import Input from '@/components/Input';
-// import test from '@/assets/main/recommond/test.jpg'
 
 const articleTypeHover = 'article-type-hover';
 const types = [
@@ -62,16 +61,6 @@ export default function Articles() {
           console.log(res);
         })
         .catch((err) => console.log('err comes from getArticleName api:' + err));
-    },
-    test() {
-      test({
-        string: 'string',
-        number: 1
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => console.log('err comes from test api:' + err));
     }
   };
   useEffect(() => {
@@ -82,7 +71,6 @@ export default function Articles() {
         setArticleList(res.data.result);
       })
       .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
-    methods.test();
   }, []);
 
   return (

@@ -4,7 +4,8 @@ import Home from '../pages/home';
 import Main from '../pages/main';
 import Article from '../pages/article';
 import NotFind from '../pages/404';
-import Test from './test';
+// eslint-disable-next-line import/no-unresolved
+import Test from '@/components/test';
 import { renderRoutes } from '@/utils/route';
 import './index.less';
 
