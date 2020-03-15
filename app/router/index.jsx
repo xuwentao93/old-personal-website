@@ -39,6 +39,7 @@ const routes = [
     name: '404'
   }
 ];
+
 export default function App() {
   return (
     <Router>

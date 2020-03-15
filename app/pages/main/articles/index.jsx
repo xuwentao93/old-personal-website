@@ -6,9 +6,9 @@ import './pc.less';
 import './mobile.less';
 // import 'antd/es/button/style/css';
 import { getArticleMsgApi } from '@/models/actions/getArticles';
-import { getArticleName } from '@/api/article';
+// import { getArticleName } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
-import Input from '@/components/Input';
+// import Input from '@/components/Input';
 
 
 const articleTypeHover = 'article-type-hover';
@@ -19,18 +19,28 @@ const types = [
     hover: articleTypeHover
   },
   {
-    type: 'tech',
-    label: '技术',
+    type: 'frontend',
+    label: '前端',
     hover: undefined
   },
   {
-    type: 'game',
-    label: '游戏',
+    type: 'algorithm',
+    label: '算法',
+    hover: undefined
+  },
+  {
+    type: 'network',
+    label: '网络',
     hover: undefined
   },
   {
     type: 'life',
     label: '生活',
+    hover: undefined
+  },
+  {
+    type: 'other',
+    label: '其它',
     hover: undefined
   }
 ];
@@ -42,41 +52,43 @@ function Articles({ typeArticleList, typeArticleApi }) {
     if (index === 0) return articleTypeHover;
     return undefined;
   }));
-  const [articleNameValue, setArticleNameValue] = useState('');
+  // const [articleNameValue, setArticleNameValue] = useState('');
   const methods = {
     setType(index) { // 根据类型选择文章列表.
       const copyList = types.map(() => undefined);
       copyList[index] = articleTypeHover;
       setArticleTypeHoverList(copyList);
-      // getArticleMsg({
-      //   type: types[index].type
-      // })
-      //   .then((res) => {
-      //     setArticleList(res.data.result);
-      //   })
-      //   .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
-      typeArticleApi(types[index].type);
-      setArticleList(typeArticleList);
+      // eslint-disable-next-line func-names
+      (async function () {
+        await typeArticleApi(types[index].type);
+        await setArticleList(typeArticleList.data);
+        console.log(typeArticleList);
+      }());
+      // typeArticleApi(types[index].type);
+      // setArticleList(typeArticleList.data);
     },
-    setArticleNameValue(event) {
-      setArticleNameValue(event.target.value);
-      getArticleName({
-        name: event.target.value
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => console.log('err comes from getArticleName api:' + err));
+    // setArticleNameValue(event) { // input search function.
+    //   setArticleNameValue(event.target.value);
+    //   getArticleName({
+    //     name: event.target.value
+    //   })
+    //     .then((res) => {
+    //       console.log(res);
+    //     })
+    //     .catch((err) => console.log('err comes from getArticleName api:' + err));
+    // },
+    test() {
+      setArticleList(typeArticleList.data);
     }
   };
   useEffect(() => {
     typeArticleApi('all');
-    console.log(typeArticleList);
-    setArticleList(typeArticleList);
+    // setTimeout(() => setArticleList(typeArticleList.data), 2000);
   }, []);
 
   return (
     <div className="articles">
+      <li className="test" onClick={methods.test}>123123123</li>
       <div className="menu-list">
         <ul className="type-list">
           {
@@ -92,12 +104,12 @@ function Articles({ typeArticleList, typeArticleApi }) {
             ))
           }
         </ul>
-        <div className="search">
+        {/* <div className="search">
           <Input
             value={articleNameValue}
             onChange={methods.setArticleNameValue}
           />
-        </div>
+        </div> */}
       </div>
       <ul className="article-list">
         {
@@ -112,7 +124,7 @@ function Articles({ typeArticleList, typeArticleApi }) {
               <div className="brief">
                 <span className="time">{ article.time }</span>
                 <span className="article-evaluate">
-                  <Button>
+                  <Button onClick={methods.test}>
                     <i className="fa fa-eye" aria-hidden="true"></i>
                     <span className="number">{ article.views }</span>
                   </Button>
