@@ -3,16 +3,31 @@ import { Link } from 'react-router-dom';
 import './index.less';
 import { getArticleMsg } from '@/api/article';
 
+function toggleType(type) {
+  switch (type) {
+    case 'frontend':
+      return '前端';
+    case 'network':
+      return '网络';
+    case 'algorithm':
+      return '算法';
+    case 'life':
+      return '生活';
+    case 'other':
+      return '其他';
+    default:
+      throw new Error('you get a wrong error from toggleType function');
+  }
+}
+
 export default function Recently() {
   const [articleList, setArticleList] = useState([]);
-  const media = window.innerWidth > 700 ? 'pc' : 'mobile';
   useEffect(() => {
     getArticleMsg({
-      current: true,
-      media
+      current: true
     })
       .then((res) => {
-        setArticleList(res.data.result);
+        setArticleList(res.data.articleList);
       })
       .catch((err) => console.log('err comes from getArticleMsg api: ' + err));
   }, []);
@@ -22,11 +37,11 @@ export default function Recently() {
       <ul className="article-list">
         {
           articleList.map((article) => (
-            <li className="recently-article-link" key={article.to}>
-              <h3><Link to={article.to} className="recently-article-title">{ article.title }</Link></h3>
+            <li className="recently-article-link" key={article.url}>
+              <h3><Link to={article.url} className="recently-article-title">{ article.title }</Link></h3>
               <div className="recently-article-text">{ article.text }</div>
               <div className="recently-article-brief">
-                <span className="recently-article-type">{ article.label }</span>
+                <span className="recently-article-type">{ toggleType(article.type) }</span>
                 <span className="recently-article-time">{ article.time }</span>
               </div>
             </li>

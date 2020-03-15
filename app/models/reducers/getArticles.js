@@ -12,15 +12,11 @@ export function typeArticleList(state = s, action) {
         data: action.data
       };
     default:
-      return {
-        ...state
-      };
+      return state;
   }
 }
 
-export function currentArticleList(state = {
-  data: null
-}, action) {
+export function currentArticleList(state = s, action) {
   switch (action.type) {
     case CURRENT:
       return {
