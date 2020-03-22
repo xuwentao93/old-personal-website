@@ -7,7 +7,7 @@ export function getArticleMsgApi(params) { // 获取文章列表.
     .then((res) => {
       console.log(res.data);
       if (res.data.success === false) console.error('something must be wrong in action getArticleMsgApi');
-      else return res.data.result;
+      else return res.data.articleList;
     })
     .then((data) => {
       console.log(data);
