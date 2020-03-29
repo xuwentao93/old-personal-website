@@ -38,7 +38,7 @@ export default function Recently() {
         {
           articleList.map((article) => (
             <li className="recently-article-link" key={article.url}>
-              <h3><Link to={article.url} className="recently-article-title">{ article.title }</Link></h3>
+              <h3><Link to={`article${article.url}`} className="recently-article-title">{ article.title }</Link></h3>
               <div className="recently-article-text">{ article.text }</div>
               <div className="recently-article-brief">
                 <span className="recently-article-type">{ toggleType(article.type) }</span>

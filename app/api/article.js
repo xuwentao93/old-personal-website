@@ -5,4 +5,6 @@ export const getArticleMsg = (data) => request.get('/getArticleMsg', { params: d
 
 export const getArticleName = (data) => request.get('/getArticleName', { params: data }); // 搜索文章名.
 
+export const readArticle = (data) => request.get('/readArticle', { params: data }); // 读取文章.
+
 // export const testWebsocket = (data) => request.get('', )

@@ -1,8 +1,10 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+// const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HappyPack = require('happypack');
+// const TerserPlugin = require('terser-webpack-plugin');
 // const webpack = require('webpack')
 // Notice me! please use image-webpack-plugin to minify images' size.
 
@@ -26,6 +28,7 @@ module.exports = {
           },
           'babel-loader',
           'eslint-loader'
+          // ['happypack/loader?id=babels']
         ],
         exclude: path.join(__dirname, '../node_modules')
       },
@@ -64,7 +67,7 @@ module.exports = {
       filename: './css/[name]_[contenthash:8].css'
     }),
     new FriendlyErrorsWebpackPlugin(),
-    new HardSourceWebpackPlugin(),
+    // new HardSourceWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '../app/index.html'),
       filename: 'index.html',
@@ -79,9 +82,20 @@ module.exports = {
         removeComments: false
       }
     })
+    // new HappyPack({
+    //   id: 'babel',
+    //   loaders: ['babel-loader?cacheDirectory', 'eslint-loader']
+    // })
     // new webpack.DllReferencePlugin({ // 引入这个插件, 将我们经常打包的东西引入进来, 优化项目体积和构建速度.
     //   // eslint-disable-next-line global-require
     //   manifest: require('../static/library.json')
     // })
   ]
+  // optimization: {
+  //   minimize: true,
+  //   minimizer: [new TerserPlugin({
+  //     parallel: true,
+  //     cache: true
+  //   })]
+  // }
 };

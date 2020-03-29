@@ -6,6 +6,10 @@ import Article from '../pages/article';
 import NotFind from '../pages/404';
 // eslint-disable-next-line import/no-unresolved
 import Test from '@/components/test';
+import Testa from '@/pages/test/test1.jsx';
+import Testb from '@/pages/test/test2.jsx';
+// eslint-disable-next-line import/no-unresolved
+import Editor from '@/pages/editor';
 import { renderRoutes } from '@/utils/route';
 import './index.less';
 
@@ -32,6 +36,26 @@ const routes = [
     component: Test,
     path: '/test',
     name: 'test'
+  },
+  {
+    component: Testa,
+    path: '/testa',
+    name: 'testa'
+  },
+  {
+    component: Testb,
+    path: '/testb',
+    name: 'testb'
+  },
+  {
+    component: Article,
+    name: 'article',
+    path: '/article:id'
+  },
+  {
+    component: Editor,
+    name: 'editor',
+    path: '/editor'
   },
   {
     component: NotFind,

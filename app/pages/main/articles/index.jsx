@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import './pc.less';
@@ -13,11 +14,13 @@ import { ARTICLETYPEHOVER, TYPES, TYPE_TOGGLE } from './constant';
 
 // eslint-disable-next-line object-curly-newline
 function Articles({ typeArticleList, typeArticleApi }) {
+  let history = useHistory();
   const [articleList, setArticleList] = useState([]);
   const [articleTypeHoverList, setArticleTypeHoverList] = useState(TYPES.map((type, index) => {
     if (index === 0) return ARTICLETYPEHOVER;
     return undefined;
   }));
+
   // const [articleNameValue, setArticleNameValue] = useState('');
   const methods = {
     setType(index) { // 根据类型选择文章列表.
@@ -28,7 +31,7 @@ function Articles({ typeArticleList, typeArticleApi }) {
       (async function () {
         await typeArticleApi(TYPES[index].type);
         await setArticleList(typeArticleList.data);
-        console.log(typeArticleList);
+        // console.log(typeArticleList);
       }());
       // typeArticleApi(TYPES[index].type);
       // setArticleList(typeArticleList.data);
@@ -43,6 +46,9 @@ function Articles({ typeArticleList, typeArticleApi }) {
     //     })
     //     .catch((err) => console.log('err comes from getArticleName api:' + err));
     // },
+    toArticle(url) {
+      history.push(`/article${url}`);
+    },
     test() {
       setArticleList(typeArticleList.data);
     }
@@ -80,7 +86,11 @@ function Articles({ typeArticleList, typeArticleApi }) {
       <ul className="article-list">
         {
           articleList.map((article) => (
-            <li className="article" key={`${article.title}${article.time}`}>
+            <li
+              className="article"
+              key={`${article.title}${article.time}`}
+              onClick={() => methods.toArticle(article.url)}
+            >
               { article.img && <img src={article.img} alt="can't find img" className="article-img" /> }
               <h3>
                 <span className="type">{ TYPE_TOGGLE(article.type) }</span>
@@ -110,7 +120,7 @@ function Articles({ typeArticleList, typeArticleApi }) {
 
 const getArticleList = (state) => {
   const { typeArticleList } = state;
-  console.log(state);
+  // console.log(state);
   return { typeArticleList };
 };
 
