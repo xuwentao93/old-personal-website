@@ -1,4 +1,5 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
 import Title from './title';
 import Write from './write';
 // eslint-disable-next-line import/no-unresolved
@@ -6,12 +7,13 @@ import View from '@/components/view';
 import './common.less';
 
 export default function Editor() {
+  const [content, setContent] = useState('');
   return (
     <>
       <Title />
       <div className="editor-center">
-        <Write />
-        <View />
+        <Write content={setContent} />
+        <View text={content} />
       </div>
     </>
   );
