@@ -10,7 +10,7 @@ export default function Editor() {
   const [content, setContent] = useState('');
   return (
     <>
-      <Title />
+      <Title text={content} />
       <div className="editor-center">
         <Write content={setContent} />
         <View text={content} />

@@ -7,4 +7,6 @@ export const getArticleName = (data) => request.get('/getArticleName', { params:
 
 export const readArticle = (data) => request.get('/readArticle', { params: data }); // 读取文章.
 
+export const writeArticle = (data) => request.post('/writeArticle', data); // 写文章.
+
 // export const testWebsocket = (data) => request.get('', )
