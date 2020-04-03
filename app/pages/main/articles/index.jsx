@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -7,17 +8,16 @@ import './pc.less';
 import './mobile.less';
 // import 'antd/es/button/style/css';
 import { getArticleMsgApi } from '@/models/actions/getArticles';
-// import { getArticleName } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
 // import Input from '@/components/Input';
-import { ARTICLETYPEHOVER, TYPES, TYPE_TOGGLE } from './constant';
+import { ARTICLE_TYPE_HOVER, TYPES, TYPE_TOGGLE } from './constant';
 
 // eslint-disable-next-line object-curly-newline
 function Articles({ typeArticleList, typeArticleApi }) {
   let history = useHistory();
   const [articleList, setArticleList] = useState([]);
   const [articleTypeHoverList, setArticleTypeHoverList] = useState(TYPES.map((type, index) => {
-    if (index === 0) return ARTICLETYPEHOVER;
+    if (index === 0) return ARTICLE_TYPE_HOVER;
     return undefined;
   }));
 
@@ -25,16 +25,13 @@ function Articles({ typeArticleList, typeArticleApi }) {
   const methods = {
     setType(index) { // 根据类型选择文章列表.
       const copyList = TYPES.map(() => undefined);
-      copyList[index] = ARTICLETYPEHOVER;
+      copyList[index] = ARTICLE_TYPE_HOVER;
       setArticleTypeHoverList(copyList);
-      // eslint-disable-next-line func-names
       (async function () {
-        await typeArticleApi(TYPES[index].type);
-        await setArticleList(typeArticleList.data);
+        const currentTypeArticleList = await typeArticleApi(TYPES[index].type);
+        await setArticleList(currentTypeArticleList);
         // console.log(typeArticleList);
       }());
-      // typeArticleApi(TYPES[index].type);
-      // setArticleList(typeArticleList.data);
     },
     // setArticleNameValue(event) { // input search function.
     //   setArticleNameValue(event.target.value);
@@ -54,8 +51,10 @@ function Articles({ typeArticleList, typeArticleApi }) {
     }
   };
   useEffect(() => {
-    typeArticleApi('all');
-    // setTimeout(() => setArticleList(typeArticleList.data), 2000);
+    (async function () {
+      const renderArticleList = await typeArticleApi('all');
+      setArticleList(renderArticleList);
+    }());
   }, []);
 
   return (

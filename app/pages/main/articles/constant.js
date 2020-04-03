@@ -1,10 +1,10 @@
-export const ARTICLETYPEHOVER = 'article-type-hover';
+export const ARTICLE_TYPE_HOVER = 'article-type-hover';
 
 export const TYPES = [
   {
     type: 'all',
     label: '全部',
-    hover: ARTICLETYPEHOVER
+    hover: ARTICLE_TYPE_HOVER
   },
   {
     type: 'frontend',

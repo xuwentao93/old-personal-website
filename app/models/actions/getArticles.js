@@ -17,6 +17,7 @@ export function getArticleMsgApi(params) { // 获取文章列表.
         console.error(`You get an error comes from getArticleMsgApi, we can't get the correct params,
         please check it`);
       }
+      return data;
     })
     .catch((err) => console.log('err comes from  api:' + err));
 }
