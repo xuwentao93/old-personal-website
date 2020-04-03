@@ -1,0 +1,53 @@
+@img-width: 760px;
+@img-height: 503px;
+
+.personal-carousel {
+  position: relative;
+  width: @img-width;
+  height: @img-height;
+
+  & > .personal-carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: @img-width;
+    height: @img-height;
+  }
+
+}
+
+.personal-carousel-player {
+  position: relative;
+  width: @img-width;
+  padding: 0 20px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #000;
+
+  .fa {
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .fa-play {
+    margin-right: 605px;
+  }
+
+  .fa-step-forward {
+    display: inline-block;
+    margin-left: 20px;
+  }
+
+  .fa-step-backward {
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  .personal-carousel-img-number {
+    color: #fff;
+  }
+}
+
+.test {
+  z-index: -999;
+}
