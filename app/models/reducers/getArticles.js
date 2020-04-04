@@ -6,7 +6,6 @@ const s = {
 export function typeArticleList(state = s, action) {
   switch (action.type) {
     case TYPE:
-      console.log(action);
       return {
         ...state,
         data: action.data

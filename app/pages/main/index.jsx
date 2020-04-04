@@ -28,7 +28,6 @@ export default function Container({ routes }) {
 
 function Main() {
   const width = window.innerWidth;
-  console.log(width);
   if (width > 700) {
     return (
       <div className="main">

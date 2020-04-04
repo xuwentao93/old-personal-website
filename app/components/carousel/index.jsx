@@ -1,5 +1,6 @@
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+
+import React, { useState, useRef } from 'react';
+import PropTypes from 'prop-types';
 import './index.less';
 
 export default function Carousel(props) {
@@ -9,9 +10,13 @@ export default function Carousel(props) {
   const [autoPlay, setAutoPlay] = useState(null);
   // eslint-disable-next-line no-unused-vars
   const [showImg, setShowImg] = useState(Array(imgList.length).fill(-1));
+  const play = useRef();
+  const pause = useRef();
   showImg[0] = 99;
   const methods = {
     next() {
+      play.current.style.display = 'inline-block';
+      pause.current.style.display = 'none';
       clearInterval(autoPlay);
       setAutoPlay(null);
       if (index === imgList.length - 1) {
@@ -25,6 +30,8 @@ export default function Carousel(props) {
       }
     },
     last() {
+      play.current.style.display = 'inline-block';
+      pause.current.style.display = 'none';
       clearInterval(autoPlay);
       setAutoPlay(null);
       if (index === 0) {
@@ -38,6 +45,9 @@ export default function Carousel(props) {
       }
     },
     autoPlay() {
+      // showImg[index] = -1;
+      play.current.style.display = 'none';
+      pause.current.style.display = 'inline-block';
       setAutoPlay(setInterval(() => { // autoPlay 需要解决 setInterval 闭包引起的 state 无法实时更新.
         let indexState = -1;
         setIndex((currentIndex) => {
@@ -46,26 +56,26 @@ export default function Carousel(props) {
         });
         if (indexState === imgList.length - 1) {
           setIndex(0);
-          setShowImg((currentImg) => {
-            currentImg[imgList.length - 1] = -1;
-            currentImg[0] = 99;
-            return currentImg;
-          });
+          const arr = Array.from(Array(imgList.length).fill(-1));
+          arr[0] = 99;
+          setShowImg(arr);
         } else {
           let currentImgNumber = NaN;
           setIndex((currentIndex) => {
             currentImgNumber = currentIndex + 1;
             return currentIndex + 1;
           });
-          console.log(currentImgNumber);
-          setShowImg((currentImg) => {
-            console.log(currentImg);
-            currentImg[currentImgNumber - 1] = -1;
-            currentImg[currentImgNumber] = 99;
-            return currentImg;
-          });
+          const arr = Array.from(Array(imgList.length).fill(-1));
+          arr[currentImgNumber] = 99;
+          setShowImg(arr);
         }
       }, 2000));
+    },
+    stop() {
+      clearInterval(autoPlay);
+      setAutoPlay(null);
+      play.current.style.display = 'inline-block';
+      pause.current.style.display = 'none';
     }
   };
   return (
@@ -84,7 +94,8 @@ export default function Carousel(props) {
         }
       </div>
       <div className="personal-carousel-player">
-        <i className="fa fa-play" aria-hidden="true" onClick={methods.autoPlay}></i>
+        <i className="fa fa-play" ref={play} aria-hidden="true" onClick={methods.autoPlay}></i>
+        <i className="fa fa-pause" ref={pause} aria-hidden="true" onClick={methods.stop}></i>
         <i className="fa fa-step-backward" aria-hidden="true" onClick={methods.last}></i>
         <span className="personal-carousel-img-number">{`${index + 1} / ${imgList.length}`}</span>
         <i className="fa fa-step-forward" aria-hidden="true" onClick={methods.next}></i>
@@ -92,3 +103,7 @@ export default function Carousel(props) {
     </>
   );
 }
+
+Carousel.propTypes = {
+  imgList: PropTypes.array.isRequired
+};
