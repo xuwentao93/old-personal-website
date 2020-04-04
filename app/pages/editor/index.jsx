@@ -5,15 +5,8 @@ import Write from './write';
 // eslint-disable-next-line import/no-unresolved
 import View from '@/components/view';
 // eslint-disable-next-line import/no-unresolved
-import Carousel from '@/components/carousel';
 import './common.less';
-import alpaca from '@/assets/home/alpaca.jpg';
-import kitty from '@/assets/home/kitty.jpg';
-import koala from '@/assets/home/koala.jpg';
-import panda from '@/assets/home/panda.jpg';
-import puppy from '@/assets/home/puppy.jpg';
 
-const imgList = [alpaca, kitty, koala, panda, puppy];
 
 export default function Editor() {
   const [content, setContent] = useState('');
@@ -24,7 +17,6 @@ export default function Editor() {
         <Write content={setContent} />
         <View text={content} />
       </div>
-      <Carousel imgList={imgList} />
     </>
   );
 }
