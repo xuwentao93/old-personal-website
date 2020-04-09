@@ -6,9 +6,7 @@ import './index.less';
 export default function Carousel(props) {
   const { imgList } = props;
   const [index, setIndex] = useState(0);
-  // eslint-disable-next-line no-unused-vars
   const [autoPlay, setAutoPlay] = useState(null);
-  // eslint-disable-next-line no-unused-vars
   const [showImg, setShowImg] = useState(Array(imgList.length).fill(-1));
   const play = useRef();
   const pause = useRef();
@@ -45,10 +43,9 @@ export default function Carousel(props) {
       }
     },
     autoPlay() {
-      // showImg[index] = -1;
       play.current.style.display = 'none';
       pause.current.style.display = 'inline-block';
-      setAutoPlay(setInterval(() => { // autoPlay 需要解决 setInterval 闭包引起的 state 无法实时更新.
+      setAutoPlay(setInterval(() => {
         let indexState = -1;
         setIndex((currentIndex) => {
           indexState = currentIndex;

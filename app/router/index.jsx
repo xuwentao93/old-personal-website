@@ -26,7 +26,7 @@ const routes = [
       {
         component: Article,
         name: 'article',
-        path: '/main/article'
+        path: '/main/article/:id'
       }
     ]
   },

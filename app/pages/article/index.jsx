@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './index.less';
 import { useParams } from 'react-router-dom';
 import { readArticle } from '@/api/article';
-
+// eslint-disable-next-line import/no-unresolved
+import View from '@/components/view';
 
 export default function Article() {
   const [article, setArticle] = useState();
@@ -24,6 +25,6 @@ export default function Article() {
   }, []);
 
   return (
-    <div className="article-page">{ article }</div>
+    <View text={article} />
   );
 }
