@@ -26,7 +26,7 @@ const routes = [
       {
         component: Article,
         name: 'article',
-        path: '/main/article'
+        path: '/main/article/:id'
       }
     ]
   },
@@ -34,11 +34,6 @@ const routes = [
     component: Test,
     path: '/test',
     name: 'test'
-  },
-  {
-    component: Article,
-    name: 'article',
-    path: '/article:id'
   },
   {
     component: Editor,

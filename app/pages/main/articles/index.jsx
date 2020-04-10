@@ -13,7 +13,7 @@ import { getArticleMsgApi } from '@/models/actions/getArticles';
 import { ARTICLE_TYPE_HOVER, TYPES, TYPE_TOGGLE } from './constant';
 
 // eslint-disable-next-line object-curly-newline
-function Articles({ typeArticleList, typeArticleApi }) {
+function Articles({ typeArticleApi }) {
   let history = useHistory();
   const [articleList, setArticleList] = useState([]);
   const [articleTypeHoverList, setArticleTypeHoverList] = useState(TYPES.map((type, index) => {
@@ -44,10 +44,7 @@ function Articles({ typeArticleList, typeArticleApi }) {
     //     .catch((err) => console.log('err comes from getArticleName api:' + err));
     // },
     toArticle(url) {
-      history.push(`/article${url}`);
-    },
-    test() {
-      setArticleList(typeArticleList.data);
+      history.push(`/main/article/${url}`);
     }
   };
   useEffect(() => {
@@ -59,7 +56,6 @@ function Articles({ typeArticleList, typeArticleApi }) {
 
   return (
     <div className="articles">
-      <li className="test" onClick={methods.test}>123123123</li>
       <div className="menu-list">
         <ul className="type-list">
           {
@@ -128,7 +124,6 @@ const setArticleList = (dispatch) => ({
 });
 
 Articles.propTypes = {
-  typeArticleList: PropTypes.object.isRequired,
   typeArticleApi: PropTypes.func.isRequired
 };
 
