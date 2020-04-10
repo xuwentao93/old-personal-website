@@ -6,7 +6,8 @@ import { readArticle } from '@/api/article';
 import View from '@/components/view';
 
 export default function Article() {
-  const [article, setArticle] = useState();
+  const [article, setArticle] = useState('');
+  const [title, setTitle] = useState('');
   let { id } = useParams();
   const methods = {
     readArticle() {
@@ -16,6 +17,7 @@ export default function Article() {
         .then((res) => {
           console.log(res);
           setArticle(res.data.article);
+          setTitle(res.data.title);
         })
         .catch((err) => console.log('err comes from readArticle api:' + err));
     }
@@ -25,6 +27,12 @@ export default function Article() {
   }, []);
 
   return (
-    <View text={article} />
+    <div className="article-page">
+      <div className="article-left"></div>
+      <article className="article-center">
+        <h1 className="article-title">{ title }</h1>
+        <View text={article} />
+      </article>
+    </div>
   );
 }

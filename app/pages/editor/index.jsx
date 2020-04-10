@@ -5,7 +5,7 @@ import Write from './write';
 // eslint-disable-next-line import/no-unresolved
 import View from '@/components/view';
 // eslint-disable-next-line import/no-unresolved
-import './common.less';
+import './index.less';
 
 
 export default function Editor() {
@@ -15,7 +15,9 @@ export default function Editor() {
       <Title text={content} />
       <div className="editor-center">
         <Write content={setContent} />
-        <View text={content} />
+        <div className="editor-view">
+          <View text={content} />
+        </div>
       </div>
     </>
   );

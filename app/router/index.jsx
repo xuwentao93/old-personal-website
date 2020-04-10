@@ -36,11 +36,6 @@ const routes = [
     name: 'test'
   },
   {
-    component: Article,
-    name: 'article',
-    path: '/article:id'
-  },
-  {
     component: Editor,
     name: 'editor',
     path: '/editor'

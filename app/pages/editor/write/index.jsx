@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import './common.less';
+import './index.less';
 
 export default function Write(props) {
   const text = useRef(null);
@@ -11,6 +11,6 @@ export default function Write(props) {
     }
   };
   return (
-    <div className="editor-write" contentEditable ref={text} onInput={methods.write} />
+    <div className="editor-write" contentEditable ref={text} onInput={methods.write} spellCheck="false" />
   );
 }
