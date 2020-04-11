@@ -1,3 +1,5 @@
+@type-list-width: 140px;
+
 .editor-title {
   position: relative;
   display: flex;
@@ -16,7 +18,21 @@
 
 .editor-title-tools {
   position: absolute;
-  right: 20px;
+  right: 30px;
+  display: flex;
+
+  > div {
+    margin-right: 10px;
+  }
+
+  .editor-title-type-list {
+    width: @type-list-width;
+    line-height: 30px;
+  }
+
+  .editor-title-type-select {
+    width: @type-list-width;
+  }
 
   .editor-title-onload {
     padding: 8px 15px;
