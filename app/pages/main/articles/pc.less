@@ -1,5 +1,14 @@
 @import '../../../styles/utils.less';
 
+@type-size: 14px;
+@type-weight: normal;
+@common-family: apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, Microsoft YaHei;
+
+.fa-clock-o {
+  display: inline-block;
+  margin-right: 2px;
+}
+
 @media screen and (min-width: 700px) {
   .articles {
     padding: 0 20px 20px 20px;
@@ -56,25 +65,45 @@
     width: 100%;
     padding: 10px 20px;
     margin-top: 20px;
-    border: 1px solid #ddd;
+    // border: 1px solid #ddd;
     border-radius: 3px;
     background-color: #fff;
-    // box-shadow: 1px 1px 5px #999;
-    box-shadow: 2px 2px 4px #bbb;
+    box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+    cursor: pointer;
     
+    .article-navigator {
+      border-bottom: 1px solid #ebecef;
+      padding-bottom: 8px;
+    }
+
     .type {
+      font-size: @type-size;
+      font-weight: @type-weight;
+      color: #ff0068;
+      font-family: @common-family;
+    }
+
+    .type-circle {
       display: inline-block;
-      margin-right: 8px;
-      padding: 4px 15px;
-      border-radius: 5px;
-      font-size: 15px;
-      font-weight: normal;
-      color: #fff;
-      background-color: #49f;
+      margin: 0 1px;
+      color: #888;
+    }
+
+    .subtype {
+      display: inline-block;
+      margin-right: 12px;
+      font-size: @type-size;
+      font-weight: @type-weight;
+      font-family:  @common-family;
+      color: #b71ed7;
     }
   
     .title {
-      font-size: 18px;
+      line-height: 26px;
+      font-size: 19px;
+      font-family: @common-family;
+      font-weight: normal;
+      color: #333;
     }
   
     .article-img {
@@ -95,15 +124,32 @@
       font-size: 16px;
 
       .time {
-        color: #f00;
+        color: #888;
       }
 
+      .number {
+        display: inline-block;
+        margin-left: 2px;
+      }
       .article-evaluate {
+        display: flex;
         float: right;
         position: relative;
         right: 6%;
       }
+
+      .comment {
+        display: flex;
+        align-items: center;
+        height: 24px;
+        padding: 0 10px;
+        margin-right: -1px; // 合并重叠元素的外边框.
+        border: 1px solid #edeeef;
+        font-size: 14px;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, PingFang SC;
+        color: #b2bac2;
+      }
     }
   }
-  
 }
+  

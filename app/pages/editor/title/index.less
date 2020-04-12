@@ -1,0 +1,104 @@
+@type-list-width: 140px;
+@subtype-list-width: 184px;
+
+.editor-title {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.editor-title-title {
+  width: 70%;
+  height: 61px;
+  padding-left: 15px;
+  border-color: transparent;
+  border-width: 0;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.editor-title-tools {
+  position: absolute;
+  right: 30px;
+  display: flex;
+  align-items: center;
+
+  > div {
+    margin:0 25px;
+  }
+
+  .editor-title-type-list {
+    width: @type-list-width;
+    line-height: 30px;
+  }
+
+  .editor-title-type-select {
+    width: @type-list-width;
+    height: 32px;
+  }
+
+  .editor-title-subtype-container {
+    position: relative;
+    width: @subtype-list-width;
+    padding-right: 3px;
+    border-bottom: 1px solid #bbb;
+  }
+
+  .editor-title-subtype {
+    display: inline-block;
+    padding-left: 5px;
+    border-width: 0;
+    border-color: transparent;
+    transition: border-color .2s;
+    &:focus {
+      border-bottom-color: #49f;
+    }
+  }
+
+  .editor-title-subtype-list {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: absolute;
+    left: 0;
+    top: 38px;
+    width: @subtype-list-width;
+    max-height: 160px;
+    font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB";
+    font-size: 12px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
+
+    > div {
+      width: @subtype-list-width;
+      height: 32px;
+      padding: 8px 0 8px 12px;
+      color: rgb(38, 50, 56);
+      background-color: #fff;
+      cursor: pointer;
+
+      &:hover {
+        color: #fff;
+        background: rgb(38, 50, 56);
+      }
+    }
+  }
+
+  .editor-title-onload {
+    min-width: 80px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    border-radius: 3px;
+    letter-spacing: 5px;
+    cursor: pointer;
+    background-color: #49f;
+    color: #fff;
+    transition: backgroudColor .2s;
+  
+    &:hover {
+      background-color: #66b1ff;
+    }
+  }
+
+}

@@ -5,8 +5,11 @@ export const CURRENT = 'current';
 export function getArticleMsgApi(params) { // 获取文章列表.
   return (dispatch) => getArticleMsg(params)
     .then((res) => {
-      if (res.data.success === false) console.error('something must be wrong in action getArticleMsgApi');
-      else return res.data.articleList;
+      if (res.data.success === false) {
+        console.error('something must be wrong in action getArticleMsgApi');
+        return [];
+      }
+      return res.data.articleList;
     })
     .then((data) => {
       if (params.current) dispatch(currentArticles(data)); // 获取近期文章列表.

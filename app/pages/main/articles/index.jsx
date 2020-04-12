@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+// eslint-disable-next-line no-unused-vars
 import { Button } from 'antd';
 import './pc.less';
 import './mobile.less';
@@ -87,22 +88,31 @@ function Articles({ typeArticleApi }) {
               onClick={() => methods.toArticle(article.url)}
             >
               { article.img && <img src={article.img} alt="can't find img" className="article-img" /> }
-              <h3>
+              <h3 className="article-navigator">
                 <span className="type">{ TYPE_TOGGLE(article.type) }</span>
+                <span className="type-circle">{ article.subtype && '·' }</span>
+                <span className="subtype">{ article.subtype }</span>
                 <span className="title">{ article.title }</span>
               </h3>
               <div className="text">{ article.text }</div>
               <div className="brief">
-                <span className="time">{ article.time.slice(0, 10) }</span>
+                <span className="time">
+                  <i className="fa fa-clock-o"></i>
+                  { article.time.slice(0, 10) }
+                </span>
                 <span className="article-evaluate">
-                  <Button onClick={methods.test}>
-                    <i className="fa fa-eye" aria-hidden="true"></i>
+                  <div className="comment">
+                    <i className="fa fa-eye"></i>
                     <span className="number">{ article.watch }</span>
-                  </Button>
-                  <Button>
-                    <i className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                  </div>
+                  <div className="comment">
+                    <img src="https://b-gold-cdn.xitu.io/v3/static/img/comment.4d5744f.svg" alt="can't find img" />
+                    <span className="number">{ article.comment }</span>
+                  </div>
+                  <div className="comment">
+                    <img src="https://b-gold-cdn.xitu.io/v3/static/img/zan.e9d7698.svg" alt="can't find img" />
                     <span className="number">{ article.thumbsup }</span>
-                  </Button>
+                  </div>
                 </span>
               </div>
             </li>
