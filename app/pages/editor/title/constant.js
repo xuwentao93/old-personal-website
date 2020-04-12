@@ -6,7 +6,7 @@ export const typeList = [
   },
   {
     label: '算法',
-    value: 'algorthim'
+    value: 'algorithm'
   },
   {
     label: '网络',

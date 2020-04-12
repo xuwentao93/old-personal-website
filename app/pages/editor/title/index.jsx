@@ -1,17 +1,21 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import './index.less';
 import { message, Select } from 'antd';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { writeArticle } from '@/api/article';
 import { dateFormat } from '@/utils';
 import { typeList } from './constant';
+import { articleSubType } from '@/models/actions/getArticleSubType';
 
-export default function Title(props) {
+function Title(props) {
   const { Option } = Select;
   const { text } = props;
   const [title, setTitle] = useState('');
-  const [typeValue, setTypeValue] = useState();
+  const [type, setType] = useState();
+  const [subtypeList, setSubtypeList] = useState([]);
+  const [subtype, setSubtype] = useState();
   const methods = {
     upload() {
       if (title === '') {
@@ -24,11 +28,20 @@ export default function Title(props) {
       }
       if (text.length < 20) {
         message.warn('文章必须大于 20 个字!');
+        return;
+      }
+      if (!type) {
+        message.warn('文章类型不能为空!');
+        return;
+      }
+      if (type !== 'life' && !subtype) {
+        message.warn('除其它类型外, 文章子类型不能为空!');
       }
       writeArticle({
         text,
         title,
-        type: 'frontend',
+        type,
+        subtype,
         time: dateFormat()
       })
         .then((res) => {
@@ -36,9 +49,13 @@ export default function Title(props) {
         })
         .catch((err) => console.log('err comes from writeArticle api:' + err));
     },
-    changeTypeValue(value) {
-      console.log(value);
-      setTypeValue(value);
+    async changeTypeValue(value) {
+      setType(value);
+      let getsubtype = await props.typeArticleApi(value);
+      setSubtypeList(getsubtype);
+    },
+    setConfirmSubtype(confirmSubtype) {
+      setSubtype(confirmSubtype);
     }
   };
   return (
@@ -53,7 +70,7 @@ export default function Title(props) {
         <Select
           placeholder="请选择文章类型"
           className="editor-title-type-list"
-          value={typeValue}
+          value={type}
           onChange={methods.changeTypeValue}
         >
           {
@@ -62,8 +79,43 @@ export default function Title(props) {
             ))
           }
         </Select>
+        <div className="editor-title-subtype-container">
+          <input
+            className="editor-title-subtype"
+            placeholder="根据类型选择子类型"
+            value={subtype}
+            onChange={(e) => setSubtype(e.target.value)}
+          />
+          <i className="fa fa-search"></i>
+          <div className="editor-title-subtype-list">
+            {
+              subtypeList.map((_subtype) => (
+                <div key={_subtype.subtype} onClick={() => methods.setConfirmSubtype(_subtype.subtype)}>
+                  { _subtype.subtype }
+                </div>
+              ))
+            }
+          </div>
+        </div>
         <div className="editor-title-onload" onClick={methods.upload}>上传</div>
       </div>
     </div>
   );
 }
+
+const subTypeList = (state) => {
+  const { selectSubtype } = state;
+  // console.log(state);
+  return { selectSubtype };
+};
+
+const getSubType = (dispatch) => ({
+  typeArticleApi: (type) => dispatch(articleSubType({ type }))
+});
+
+Title.propTypes = {
+  text: PropTypes.string.isRequired,
+  typeArticleApi: PropTypes.func.isRequired
+};
+
+export default (connect(subTypeList, getSubType))(Title);
