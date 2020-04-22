@@ -8,6 +8,8 @@ import NotFind from '../pages/404';
 import Test from '@/components/test';
 // eslint-disable-next-line import/no-unresolved
 import Editor from '@/pages/editor';
+// eslint-disable-next-line import/no-unresolved
+import Algorithm from '@/pages/algorithm';
 import { renderRoutes } from '@/utils/route';
 import './index.less';
 
@@ -34,6 +36,11 @@ const routes = [
     component: Test,
     path: '/test',
     name: 'test'
+  },
+  {
+    component: Algorithm,
+    path: '/algorithm',
+    name: 'algorithm'
   },
   {
     component: Editor,
