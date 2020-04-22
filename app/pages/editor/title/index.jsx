@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './index.less';
 import { message, Select } from 'antd';
 import { connect } from 'react-redux';
@@ -16,6 +16,9 @@ function Title(props) {
   const [type, setType] = useState();
   const [subtypeList, setSubtypeList] = useState([]);
   const [subtype, setSubtype] = useState();
+  const [subtypeListShow, setSubtypeListShow] = useState('none');
+  const subtypeListNode = useRef();
+  const subtypeInput = useRef();
   const methods = {
     upload() {
       if (title === '') {
@@ -56,6 +59,32 @@ function Title(props) {
     },
     setConfirmSubtype(confirmSubtype) {
       setSubtype(confirmSubtype);
+      setSubtypeListShow('none');
+    },
+    async ifHideSubTypeList() {
+      await new Promise((resolve) => { // 调用异步方法让其他地方的 focus 先与此 focus 先执行.
+        setTimeout(() => resolve(), 0);
+      });
+      const { children } = subtypeListNode.current;
+      if (document.activeElement === subtypeInput.current) return;
+      for (let i = 0; i < children.length; i++) {
+        if (document.activeElement === children[i]) return;
+      }
+      setSubtypeListShow('none');
+    },
+    focusSubtypeList(event) {
+      if (!type || event.key !== 'ArrowDown') return;
+      subtypeListNode.current.children[0].focus();
+    },
+    focusOtherSubtype(event, i) {
+      if (event.key === 'ArrowDown') {
+        if (i === subtypeListNode.current.children.length - 1) return;
+        subtypeListNode.current.children[i + 1].focus();
+      }
+      if (event.key === 'ArrowUp') {
+        if (i === 0) return;
+        subtypeListNode.current.children[i - 1].focus();
+      }
     }
   };
   return (
@@ -84,13 +113,24 @@ function Title(props) {
             className="editor-title-subtype"
             placeholder="根据类型选择子类型"
             value={subtype}
+            ref={subtypeInput}
             onChange={(e) => setSubtype(e.target.value)}
+            onFocus={() => setSubtypeListShow('block')}
+            onBlur={() => methods.ifHideSubTypeList()}
+            onKeyDown={(e) => methods.focusSubtypeList(e)}
           />
           <i className="fa fa-search"></i>
-          <div className="editor-title-subtype-list">
+          <div className="editor-title-subtype-list" style={{ display: subtypeListShow }} ref={subtypeListNode}>
             {
-              subtypeList.map((_subtype) => (
-                <div key={_subtype.subtype} onClick={() => methods.setConfirmSubtype(_subtype.subtype)}>
+              subtypeList.map((_subtype, i) => (
+                <div
+                  key={_subtype.subtype}
+                  onClick={() => methods.setConfirmSubtype(_subtype.subtype)}
+                  tabIndex={i + 100}
+                  onFocus={() => setSubtypeListShow('block')}
+                  onBlur={() => methods.ifHideSubTypeList()}
+                  onKeyDown={(e) => methods.focusOtherSubtype(e, i)}
+                >
                   { _subtype.subtype }
                 </div>
               ))

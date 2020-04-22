@@ -1,5 +1,5 @@
 @type-list-width: 140px;
-@subtype-list-width: 184px;
+@subtype-list-width: 174px;
 
 .editor-title {
   position: relative;
@@ -24,7 +24,7 @@
   align-items: center;
 
   > div {
-    margin:0 25px;
+    margin: 0 25px;
   }
 
   .editor-title-type-list {
@@ -49,7 +49,10 @@
     padding-left: 5px;
     border-width: 0;
     border-color: transparent;
+    font-family: "Chinese Quote", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB";
+    color: rgb(38, 50, 56);
     transition: border-color .2s;
+
     &:focus {
       border-bottom-color: #49f;
     }
@@ -67,16 +70,17 @@
     font-size: 12px;
     background-color: #fff;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 10px 0px;
-
+    
     > div {
       width: @subtype-list-width;
       height: 32px;
       padding: 8px 0 8px 12px;
+      outline: none;
       color: rgb(38, 50, 56);
       background-color: #fff;
       cursor: pointer;
 
-      &:hover {
+      &:hover, &:focus {
         color: #fff;
         background: rgb(38, 50, 56);
       }
