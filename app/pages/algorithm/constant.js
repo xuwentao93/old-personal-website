@@ -38,7 +38,7 @@ export const COLUMNS = [
           target="_blank"
           rel="noopener noreferrer"
         >
-            链接
+          链接
         </a>
       );
     }
@@ -51,7 +51,14 @@ export const COLUMNS = [
   {
     title: '熟悉程度',
     dataIndex: 'proficiency',
-    key: 'proficiency'
+    key: 'proficiency',
+    render(text) {
+      let color = '';
+      if (text === '生疏') color = '#f66';
+      if (text === '理解') color = '#49f';
+      if (text === '熟练') color = '#6d4';
+      return <span style={{ color }}>{text}</span>;
+    }
   },
   {
     title: '操作',
@@ -64,3 +71,5 @@ export const COLUMNS = [
     }
   }
 ];
+
+export const PROFICIENCY_BUTTON_LIST = ['生疏', '理解', '熟练'];

@@ -6,11 +6,12 @@ import {
   Button,
   Modal,
   message,
-  Input
+  Input,
+  Tag
 } from 'antd';
 import './index.less';
 import { getArticleSubType } from '@/api/article';
-import { COLUMNS } from './constant';
+import { COLUMNS, PROFICIENCY_BUTTON_LIST } from './constant';
 import { selectAlgorithmList, addAlgorithmProblem } from '@/api/algorithm';
 
 const { Option } = Select;
@@ -18,8 +19,10 @@ const { Option } = Select;
 export default function Algorithm() {
   const [typeList, setTypeList] = useState([{ subtype: '暂无数据' }]);
   const [dataSource, setDataSource] = useState([]);
-  const [type, setType] = useState('all');
+  const [type, setType] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [selectProficiencyButton, setSelectProficiencyButton] = useState([false, false, false]);
+
   const [problem, setProblem] = useState();
   const [link, setLink] = useState();
   const [types, setTypes] = useState();
@@ -37,6 +40,9 @@ export default function Algorithm() {
     changeType(subtype) {
       setType(subtype);
     },
+    changeAddType(currentTypes) {
+      setTypes(currentTypes);
+    },
     selectAlgorithmList(algorithmType) {
       selectAlgorithmList({ type: algorithmType })
         .then((res) => {
@@ -52,6 +58,7 @@ export default function Algorithm() {
       setShowModal(true);
     },
     addAlgorithmProblem() {
+      console.log(types);
       if (!problem || !link || !types || !proficiency) {
         message.warn('各个输入框不能为空!');
         return;
@@ -71,11 +78,17 @@ export default function Algorithm() {
           setProficienty('');
         })
         .catch((err) => console.log('err comes from addAlgorithmProblem api:' + err));
+    },
+    changeProficiency(text, i) {
+      setProficienty(text);
+      const currentSelectButtonList = [false, false, false];
+      currentSelectButtonList[i] = true;
+      setSelectProficiencyButton(currentSelectButtonList);
     }
   };
 
   useEffect(() => {
-    methods.selectAlgorithmList(type);
+    methods.selectAlgorithmList(type || 'all');
   }, [type]);
 
   return (
@@ -115,11 +128,36 @@ export default function Algorithm() {
           </div>
           <div className="algorithm-problem-title">类型: </div>
           <div>
-            <Input type="text" value={types} onChange={(e) => setTypes(e.target.value)} />
+            <Select
+              onClick={methods.selectType}
+              placeholder="根据类型筛选题目"
+              value={types}
+              onChange={(value) => methods.changeAddType(value)}
+              className="algorithm-select-list"
+              mode="multiple"
+            >
+              {
+                typeList.map((subtype) => (
+                  <Option key={subtype.subtype} value={subtype.subtype}>
+                    {subtype.subtype}
+                  </Option>
+                ))
+              }
+            </Select>
           </div>
           <div className="algorithm-problem-title">熟练程度: </div>
           <div>
-            <Input type="text" value={proficiency} onChange={(e) => setProficienty(e.target.value)} />
+            {
+              PROFICIENCY_BUTTON_LIST.map((text, i) => (
+                <Tag
+                  onClick={() => methods.changeProficiency(text, i)}
+                  className={['proficiency-button', selectProficiencyButton[i] ? 'select-button' : '']}
+                  key={text}
+                >
+                  {text}
+                </Tag>
+              ))
+            }
           </div>
         </div>
       </Modal>

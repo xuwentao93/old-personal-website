@@ -24,12 +24,31 @@
 
 .algorithm-problem-info {
   display: grid;
-  grid-template-columns: 80px 300px;
+  grid-template-columns: 80px 350px;
   grid-template-rows: repeat(4, 50px);
 
   .algorithm-problem-title {
     padding-right: 8px;
     text-align: right;
     line-height: 35px;
+  }
+
+  .algorithm-select-list {
+    width: 100%;
+  }
+
+  .proficiency-button {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 3px 15px;
+    font-size: 12px;
+    color: #666;
+    transition: background-color .2s, color .2s;
+    cursor: pointer;
+  }
+
+  .select-button {
+    background-color: #49f;
+    color: #fff;
   }
 }
