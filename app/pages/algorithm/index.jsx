@@ -13,6 +13,7 @@ import './index.less';
 import { getArticleSubType } from '@/api/article';
 import { COLUMNS, PROFICIENCY_BUTTON_LIST } from './constant';
 import { selectAlgorithmList, addAlgorithmProblem } from '@/api/algorithm';
+import { identifyCheck } from '@/api/user';
 
 const { Option } = Select;
 
@@ -21,7 +22,12 @@ export default function Algorithm() {
   const [dataSource, setDataSource] = useState([]);
   const [type, setType] = useState();
   const [showModal, setShowModal] = useState(false);
+  const [showIdentifyModal, setShowIdentifyModal] = useState(false);
   const [selectProficiencyButton, setSelectProficiencyButton] = useState([false, false, false]);
+
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [personalKey, setPersonalKey] = useState(false);
 
   const [problem, setProblem] = useState();
   const [link, setLink] = useState();
@@ -58,7 +64,10 @@ export default function Algorithm() {
       setShowModal(true);
     },
     addAlgorithmProblem() {
-      console.log(types);
+      if (!personalKey) {
+        setShowIdentifyModal(true);
+        return;
+      }
       if (!problem || !link || !types || !proficiency) {
         message.warn('各个输入框不能为空!');
         return;
@@ -70,12 +79,15 @@ export default function Algorithm() {
         proficiency
       })
         .then((res) => {
-          if (!res.success) return;
+          if (!res.data.success) return;
           message.success('题目添加成功!');
           setProblem('');
           setLink('');
-          setTypes('');
+          setTypes();
           setProficienty('');
+          const currentSelectButtonList = [false, false, false];
+          setSelectProficiencyButton(currentSelectButtonList);
+          methods.selectAlgorithmList(type || 'all');
         })
         .catch((err) => console.log('err comes from addAlgorithmProblem api:' + err));
     },
@@ -84,6 +96,23 @@ export default function Algorithm() {
       const currentSelectButtonList = [false, false, false];
       currentSelectButtonList[i] = true;
       setSelectProficiencyButton(currentSelectButtonList);
+    },
+    identifyCheck() {
+      identifyCheck({
+        username,
+        password
+      })
+        .then((res) => {
+          if (res.data.success) {
+            setPersonalKey(true);
+            setShowIdentifyModal(false);
+            console.log(showIdentifyModal);
+            message.success('身份校验成功!');
+            return;
+          }
+          message.warn('账号或密码错误!');
+        })
+        .catch((err) => console.log('err comes from identifycheck api:' + err));
     }
   };
 
@@ -111,9 +140,23 @@ export default function Algorithm() {
         </Select>
       </div>
       <Table columns={COLUMNS} dataSource={dataSource} className="problem-list"></Table>
-      <Button type="primary" onClick={methods.addProblem}>创建</Button>
+      <Button type="primary" className="algorithm-create-problem-button" onClick={methods.addProblem}>创建</Button>
       <Modal
         visible={showModal}
+        onCancel={() => setShowModal(false)}
+        onOk={methods.identifyCheck}
+      >
+        <div className="username">
+          <span>用户名: </span>
+          <Input value={username} onChange={(e) => setUsername(e.target.value)} />
+        </div>
+        <div className="password">
+          <span>密码: </span>
+          <Input value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
+        </div>
+      </Modal>
+      <Modal
+        visible={showIdentifyModal}
         onOk={methods.addAlgorithmProblem}
         onCancel={() => setShowModal(false)}
       >

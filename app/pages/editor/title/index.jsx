@@ -1,13 +1,19 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useRef } from 'react';
 import './index.less';
-import { message, Select } from 'antd';
+import {
+  message,
+  Select,
+  Modal,
+  Input
+} from 'antd';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { writeArticle } from '@/api/article';
 import { dateFormat } from '@/utils';
 import { typeList } from './constant';
 import { articleSubType } from '@/models/actions/getArticleSubType';
+import { identifyCheck } from '@/api/user';
 
 function Title(props) {
   const { Option } = Select;
@@ -17,10 +23,13 @@ function Title(props) {
   const [subtypeList, setSubtypeList] = useState([]);
   const [subtype, setSubtype] = useState();
   const [subtypeListShow, setSubtypeListShow] = useState('none');
+  const [showModal, setShowModal] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const subtypeListNode = useRef();
   const subtypeInput = useRef();
   const methods = {
-    upload() {
+    async upload() {
       if (title === '') {
         message.warn('标题不能为空!');
         return;
@@ -37,20 +46,10 @@ function Title(props) {
         message.warn('文章类型不能为空!');
         return;
       }
-      if (type !== 'life' && !subtype) {
+      if (type !== 'other' && !subtype) {
         message.warn('除其它类型外, 文章子类型不能为空!');
       }
-      writeArticle({
-        text,
-        title,
-        type,
-        subtype,
-        time: dateFormat()
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => console.log('err comes from writeArticle api:' + err));
+      setShowModal(true);
     },
     async changeTypeValue(value) {
       setType(value);
@@ -85,6 +84,38 @@ function Title(props) {
         if (i === 0) return;
         subtypeListNode.current.children[i - 1].focus();
       }
+    },
+    identifyCheck() {
+      identifyCheck({
+        username,
+        password
+      })
+        .then((res) => {
+          if (res.data.success) {
+            return true;
+          }
+          message.warn('账号或密码错误!');
+          return false;
+        })
+        .then((data) => {
+          if (data) {
+            writeArticle({
+              text,
+              title,
+              type,
+              subtype,
+              time: dateFormat()
+            })
+              .then((res) => {
+                if (res.data.success) {
+                  message.success('文件上传成功');
+                  setShowModal(false);
+                }
+              })
+              .catch((err) => console.log('err comes from writeArticle api:' + err));
+          }
+        })
+        .catch((err) => console.log('err comes from identifycheck api:' + err));
     }
   };
   return (
@@ -138,6 +169,20 @@ function Title(props) {
           </div>
         </div>
         <div className="editor-title-onload" onClick={methods.upload}>上传</div>
+        <Modal
+          visible={showModal}
+          onCancel={() => setShowModal(false)}
+          onOk={methods.identifyCheck}
+        >
+          <div className="username">
+            <span>用户名: </span>
+            <Input value={username} onChange={(e) => setUsername(e.target.value)} />
+          </div>
+          <div className="password">
+            <span>密码: </span>
+            <Input value={password} type="password" onChange={(e) => setPassword(e.target.value)} />
+          </div>
+        </Modal>
       </div>
     </div>
   );

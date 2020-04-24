@@ -25,6 +25,7 @@ function Articles({ typeArticleApi }) {
   // const [articleNameValue, setArticleNameValue] = useState('');
   const methods = {
     setType(index) { // 根据类型选择文章列表.
+      console.log(articleList);
       const copyList = TYPES.map(() => undefined);
       copyList[index] = ARTICLE_TYPE_HOVER;
       setArticleTypeHoverList(copyList);
@@ -90,8 +91,8 @@ function Articles({ typeArticleApi }) {
               { article.img && <img src={article.img} alt="can't find img" className="article-img" /> }
               <h3 className="article-navigator">
                 <span className="type">{ TYPE_TOGGLE(article.type) }</span>
-                <span className="type-circle">{ article.subtype && '·' }</span>
-                <span className="subtype">{ article.subtype }</span>
+                <span className="type-circle">{ (article.subtype === 'undefined') ? '' : '·' }</span>
+                <span className="subtype">{ (article.subtype === 'undefined') ? '' : article.subtype }</span>
                 <span className="title">{ article.title }</span>
               </h3>
               <div className="text">{ article.text }</div>

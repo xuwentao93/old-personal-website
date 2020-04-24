@@ -7,6 +7,7 @@ function deleteProblem(record) {
   const { problem, link } = record;
   // eslint-disable-next-line no-restricted-globals
   const check = confirm('确定要删除吗?');
+  console.log(record);
   if (!check) return;
   deleteAlgorithmProblem({
     problem,
@@ -14,7 +15,7 @@ function deleteProblem(record) {
   })
     .then((res) => {
       if (res.data.success) {
-        message.info('删除成功');
+        message.success('删除成功');
       }
     })
     .catch((err) => console.log('err comes from deleteProblem api:' + err));
