@@ -1,7 +1,12 @@
 /* eslint-disable no-alert */
-import React from 'react';
-import { Button, message } from 'antd';
-import { deleteAlgorithmProblem } from '@/api/algorithm';
+import React, { useState } from 'react';
+import {
+  Button,
+  message,
+  Modal,
+  Select
+} from 'antd';
+import { deleteAlgorithmProblem, updateProficiency } from '@/api/algorithm';
 
 function deleteProblem(record) {
   const { problem, link } = record;
@@ -66,8 +71,46 @@ export const COLUMNS = [
     dataIndex: 'operate',
     key: 'operate',
     render(text, record) {
+      const { Option } = Select;
+      const [showModal, setShowModal] = useState(false);
+      const [proficiency, setProficiency] = useState();
+      const methods = {
+        updateProficiency() {
+          updateProficiency({
+            link: record.link,
+            problem: record.problem,
+            proficiency
+          })
+            .then((res) => {
+              if (res.data.success) message.success('熟练度设置成功!');
+              else message.error(res.data.message);
+              setShowModal(false);
+            })
+            .catch((err) => console.log('err comes from setProficiency api:' + err));
+        }
+      };
       return (
-        <Button type="danger" onClick={() => deleteProblem(record)}>删除</Button>
+        <>
+          <Button type="primary" style={{ marginRight: '15px' }} onClick={() => setShowModal(true)}>
+            熟练度设置
+          </Button>
+          <Button type="danger" onClick={() => deleteProblem()}>删除</Button>
+          <Modal
+            visible={showModal}
+            onCancel={() => setShowModal(false)}
+            onOk={() => methods.updateProficiency(record)}
+          >
+            <Select
+              value={proficiency}
+              onChange={(value) => setProficiency(value)}
+              placeholder="熟练度设置"
+            >
+              <Option value="生疏">生疏</Option>
+              <Option value="理解">理解</Option>
+              <Option value="熟练">熟练</Option>
+            </Select>
+          </Modal>
+        </>
       );
     }
   }

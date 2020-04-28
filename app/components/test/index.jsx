@@ -1,41 +1,21 @@
 /* eslint-disable no-shadow */
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { getArticleMsgApi } from '@/models/actions/getArticles';
+import React from 'react';
 
 // eslint-disable-next-line react/prop-types
-function Test({ articleList, getArticleMsgApi }) {
-  const methods = {
-    testApi() {
-      getArticleMsgApi({
-        type: 'all'
-      });
-    }
-  };
-  useEffect(() => {
-    console.log(articleList);
-    methods.testApi();
-  }, []);
+function Test() {
   return (
     <div>1</div>
   );
 }
 
-const getArticleList = (state) => {
-  const { articleList } = state;
-  return { articleList };
-};
+function HighOC(Component) {
+  return (
+    <>
+      <div>this is a title bar</div>
+      <Component />
+      <div>this is tab bar</div>
+    </>
+  );
+}
 
-const setArticleList = (dispatch) => ({
-  getArticleMsgApi: () => dispatch(getArticleMsgApi({
-    type: 'all'
-  }))
-});
-
-Test.propTypes = {
-  getArticleMsgApi: PropTypes.func.isRequired
-  // articleList:
-};
-
-export default (connect(getArticleList, setArticleList))(Test);
+export default () => HighOC(Test);

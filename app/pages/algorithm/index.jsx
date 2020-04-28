@@ -61,13 +61,13 @@ export default function Algorithm() {
         .catch((err) => console.log('err comes from  api:' + err));
     },
     addProblem() {
-      setShowModal(true);
-    },
-    addAlgorithmProblem() {
       if (!personalKey) {
         setShowIdentifyModal(true);
         return;
       }
+      setShowModal(true);
+    },
+    addAlgorithmProblem() {
       if (!problem || !link || !types || !proficiency) {
         message.warn('各个输入框不能为空!');
         return;
@@ -104,9 +104,8 @@ export default function Algorithm() {
       })
         .then((res) => {
           if (res.data.success) {
-            setPersonalKey(true);
-            setShowIdentifyModal(false);
-            console.log(showIdentifyModal);
+            setShowIdentifyModal(() => false);
+            setPersonalKey(() => true);
             message.success('身份校验成功!');
             return;
           }
@@ -142,8 +141,8 @@ export default function Algorithm() {
       <Table columns={COLUMNS} dataSource={dataSource} className="problem-list"></Table>
       <Button type="primary" className="algorithm-create-problem-button" onClick={methods.addProblem}>创建</Button>
       <Modal
-        visible={showModal}
-        onCancel={() => setShowModal(false)}
+        visible={showIdentifyModal}
+        onCancel={() => setShowIdentifyModal(false)}
         onOk={methods.identifyCheck}
       >
         <div className="username">
@@ -156,7 +155,7 @@ export default function Algorithm() {
         </div>
       </Modal>
       <Modal
-        visible={showIdentifyModal}
+        visible={showModal}
         onOk={methods.addAlgorithmProblem}
         onCancel={() => setShowModal(false)}
       >

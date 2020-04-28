@@ -5,3 +5,5 @@ export const selectAlgorithmList = (data) => request.get('./selectAlgorithmList'
 export const addAlgorithmProblem = (data) => request.post('/addAlgorithmProblem', data);
 
 export const deleteAlgorithmProblem = (data) => request.post('/deleteAlgorithmProblem', data);
+
+export const updateProficiency = (data) => request.post('/updateProficiency', data);
