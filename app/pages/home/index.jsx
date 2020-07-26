@@ -1,13 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import './pc.less';
-import './mobile.less';
-import koala from '@/assets/home/koala.jpg';
-import panda from '@/assets/home/panda.jpg';
-import puppy from '@/assets/home/puppy.jpg';
-import kitty from '@/assets/home/kitty.jpg';
-import sheeps from '@/assets/home/sheeps.jpg';
-import alpaca from '@/assets/home/alpaca.jpg';
+import './index.less';
+// import './pc.less';
+// import './mobile.less';
+import koala from '@/assets/home/koala.jpeg';
+import panda from '@/assets/home/panda.jpeg';
+import puppy from '@/assets/home/puppy.jpeg';
+import kitty from '@/assets/home/kitty.jpeg';
+import sheeps from '@/assets/home/sheeps.jpeg';
+import alpaca from '@/assets/home/alpaca.jpeg';
 
 let index = 1;
 const imgList = [alpaca, koala, panda, puppy, sheeps, kitty];
@@ -50,7 +51,7 @@ export default function Home() {
     }, 5000);
   });
   return (
-    <div className="home" ref={home}>
+    <div className="personal-home-container" ref={home}>
       <div className="personal-profile">
         <h2 className="title">徐文韬的个人网站</h2>
         <h3 className="title-en">Xu Wentao's personal website</h3>

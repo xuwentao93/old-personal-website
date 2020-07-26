@@ -9,11 +9,11 @@ import {
   Input,
   Tag
 } from 'antd';
-import './index.less';
 import { getArticleSubType } from '@/api/article';
-import { COLUMNS, PROFICIENCY_BUTTON_LIST } from './constant';
 import { selectAlgorithmList, addAlgorithmProblem } from '@/api/algorithm';
 import { identifyCheck } from '@/api/user';
+import { COLUMNS, PROFICIENCY_BUTTON_LIST } from './constant';
+import './index.less';
 
 const { Option } = Select;
 

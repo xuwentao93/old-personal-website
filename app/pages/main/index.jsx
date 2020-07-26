@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { renderRoutes } from '@/utils/route';
 import './pc.less';
 import './mobile.less';
 import Navigator from './navigator';
@@ -10,7 +11,6 @@ import Situation from './situation';
 import Articles from './articles';
 import Recommond from './recommand';
 import Recently from './recently';
-import { renderRoutes } from '@/utils/route';
 
 export default function Container({ routes }) {
   return (

@@ -2,7 +2,7 @@ import axios from 'axios';
 import qs from 'qs';
 
 const request = axios.create({
-  timeout: 5000,
+  timeout: 10000,
   baseURL: 'http://localhost:3000',
   // baseURL: 'http://www.xuwentao.com:3000',
   headers: {

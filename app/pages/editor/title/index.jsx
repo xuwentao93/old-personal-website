@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState, useRef } from 'react';
-import './index.less';
 import {
   message,
   Select,
@@ -11,9 +10,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { writeArticle } from '@/api/article';
 import { dateFormat } from '@/utils';
-import { typeList } from './constant';
 import { articleSubType } from '@/models/actions/getArticleSubType';
 import { identifyCheck } from '@/api/user';
+import { typeList } from './constant';
+import './index.less';
 
 function Title(props) {
   const { Option } = Select;

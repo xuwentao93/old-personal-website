@@ -17,7 +17,6 @@ const toys = [
   }
 ];
 
-
 export default function Toy() {
   return (
     <div className="toy">

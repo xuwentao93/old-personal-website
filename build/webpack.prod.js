@@ -8,7 +8,9 @@ const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
 const merge = require('webpack-merge');
 const webpackBase = require('./webpack.base.js');
 
-const webpackConfig = merge(webpackBase, {
+const smp = new SpeedMeasureWebpackPlugin();
+
+const webpackConfig = merge(webpackBase, smp.wrap({
   entry: path.join(__dirname, '../app/main.js'),
   output: {
     path: path.join(__dirname, '../dist'),
@@ -30,9 +32,9 @@ const webpackConfig = merge(webpackBase, {
     //   assetNameRegExp: /\.css$/g,
     //   cssProcessor: cssnano
     // }),
-    new CleanWebpackPlugin(),
-    new SpeedMeasureWebpackPlugin()
+    new CleanWebpackPlugin()
+    // new SpeedMeasureWebpackPlugin()
   ]
-});
+}));
 
 module.exports = webpackConfig;
