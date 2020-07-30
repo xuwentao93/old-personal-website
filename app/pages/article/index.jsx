@@ -6,9 +6,10 @@ import { readArticle, likeArticle } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
 import View from '@/components/view';
 // eslint-disable-next-line import/no-unresolved
-import { IF_LIKE } from '@/config/localStorage';
+// import { IF_LIKE } from '@/config/localStorage';
 
 export default function Article() {
+  let { id } = useParams();
   const [articleMsg, setArticleMsg] = useState({
     article: '',
     thumbsup: '',
@@ -18,13 +19,12 @@ export default function Article() {
     subtype: ''
   });
   const [ifDark, setIfDark] = useState(false);
-  const [ifLike, setIfLike] = useState(localStorage.getItem(IF_LIKE) === 'like');
-  console.log(localStorage.getItem(IF_LIKE));
+  const [ifLike, setIfLike] = useState(localStorage.getItem(id) === 'like');
+  console.log(localStorage.getItem(id));
   // const [article, setArticle] = useState('');
   // const [title, setTitle] = useState('');
   // const [thumbsup, setThumbsup] = useState('');
   // const [isLiked, setIsLiked] = useState(false);
-  let { id } = useParams();
   const methods = {
     readArticle() {
       readArticle({
@@ -41,15 +41,15 @@ export default function Article() {
         .catch((err) => console.log('err comes from readArticle api:' + err));
     },
     likeArticle() {
-      const curType = localStorage.getItem(IF_LIKE);
-      if (ifLike) setArticleMsg({ ...articleMsg, thumbsup: articleMsg.thumbsup + 1 });
-      else setArticleMsg({ ...articleMsg, thumbsup: articleMsg.thumbsup - 1 });
+      const curType = localStorage.getItem(id);
       likeArticle({
-        type: curType || 'like',
+        type: curType === 'like' ? 'dislike' : 'like',
         url: id
       }).then(() => {
         console.log(curType);
-        localStorage.setItem(IF_LIKE, curType === 'like' ? 'dislike' : 'like');
+        if (ifLike) setArticleMsg({ ...articleMsg, thumbsup: articleMsg.thumbsup - 1 });
+        else setArticleMsg({ ...articleMsg, thumbsup: articleMsg.thumbsup + 1 });
+        localStorage.setItem(id, curType === 'like' ? 'dislike' : 'like');
         setIfLike(curType !== 'like');
       });
     }
