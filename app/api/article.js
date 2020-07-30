@@ -12,4 +12,6 @@ export const writeArticle = (data) => request.post('/writeArticle', data); // �
 export const getArticleSubType = (data) => request.get('/getArticleSubType', { params: data });
 // 写文章时根据 type 选择 subtype.
 
+export const likeArticle = (data) => request.get('/likeArticle', { params: data });
+
 // export const testWebsocket = (data) => request.get('', )

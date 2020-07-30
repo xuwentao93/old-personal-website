@@ -73,6 +73,7 @@ module.exports = {
       filename: 'index.html',
       inject: true,
       favicon: './bighead.ico',
+      // chunks: ['vendors'],
       minify: {
         html5: true,
         collapseWhitespace: true,
@@ -90,12 +91,32 @@ module.exports = {
     //   // eslint-disable-next-line global-require
     //   manifest: require('../static/library.json')
     // })
-  ]
-  // optimization: {
-  //   minimize: true,
-  //   minimizer: [new TerserPlugin({
-  //     parallel: true,
-  //     cache: true
-  //   })]
-  // }
+  ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      minSize: 10000,
+      // minChunks: 2,
+      name: true,
+      cacheGroups: {
+        react: {
+          test: /(react|react-dom|redux|react-router|react-router-dom|react-redux)/,
+          chunks: 'all',
+          priority: 1
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          priority: -20
+        }
+      }
+    }
+    // minimize: true,
+    // minimizer: [new TerserPlugin({
+    //   parallel: true,
+    //   cache: true
+    // })]
+  }
 };

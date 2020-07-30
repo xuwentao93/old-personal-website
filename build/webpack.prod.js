@@ -8,7 +8,7 @@ const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
 const merge = require('webpack-merge');
 const webpackBase = require('./webpack.base.js');
 
-const smp = new SpeedMeasureWebpackPlugin();
+const smp = new SpeedMeasureWebpackPlugin({ disable: true });
 
 const webpackConfig = merge(webpackBase, smp.wrap({
   entry: path.join(__dirname, '../app/main.js'),
@@ -17,7 +17,7 @@ const webpackConfig = merge(webpackBase, smp.wrap({
     filename: './js/[name]_[hash:8].js'
     // filename: '/js/bundle.js'
   },
-  stats: 'errors-only',
+  // stats: 'errors-only',
   mode: 'production',
   optimization: {
     minimizer: [

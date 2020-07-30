@@ -12,7 +12,7 @@ import { writeArticle } from '@/api/article';
 import { dateFormat } from '@/utils';
 import { articleSubType } from '@/models/actions/getArticleSubType';
 import { identifyCheck } from '@/api/user';
-import { typeList } from './constant';
+import { TYPE_LIST } from './constant';
 import './index.less';
 
 function Title(props) {
@@ -134,7 +134,7 @@ function Title(props) {
           onChange={methods.changeTypeValue}
         >
           {
-            typeList.map((item) => (
+            TYPE_LIST.map((item) => (
               <Option className="editor-title-type-select" value={item.value} key={item.value}>{ item.label }</Option>
             ))
           }

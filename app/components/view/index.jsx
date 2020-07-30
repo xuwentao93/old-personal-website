@@ -4,14 +4,16 @@ import PropTypes from 'prop-types';
 import './index.less';
 
 export default function View(props) {
-  const { text } = props;
+  const { text, style = {} } = props;
   return (
     <>
-      <div className="personal-view" dangerouslySetInnerHTML={{ __html: text }} />
+      <div className="personal-view" dangerouslySetInnerHTML={{ __html: text }} style={style} />
     </>
   );
 }
 
 View.propTypes = {
-  text: PropTypes.string.isRequired
+  text: PropTypes.string.isRequired,
+  // eslint-disable-next-line react/require-default-props
+  style: PropTypes.object
 };

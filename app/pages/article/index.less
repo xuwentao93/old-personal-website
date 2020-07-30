@@ -1,18 +1,67 @@
-.article-page {
+.personal-article-container {
   display: flex;
   min-height: 75vh;
   width: 100%;
-  background-color: #f4f5f5;
+  // background-color: #f4f5f5;
 
   .article-left {
     width: 25%;
+
+    .operate-list {
+      position: fixed;
+      top: calc(60px + 7vh);
+      left: calc(25% - 80px);
+
+      .icon-container {
+        position: relative; // 子元素绝对定位用.
+        width: 36px;
+        height: 36px;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        border-radius: 18px;
+        background-color: #fff;
+        cursor: pointer;
+      }
+
+      .image {
+        display: block;
+        width: 16px;
+        height: 15px;
+        margin: 0 auto;
+        user-select: none;
+      }
+
+      .like-num {
+        position: absolute;
+        top: -2px;
+        right: -6px;
+        min-width: 20px;
+        height: 13px;
+        text-align: center;
+        line-height: 15px;
+        font-size: 12px;
+        border-radius: 7px;
+        color: #fff;
+        background-color: #b2bac2;
+        user-select: none;
+      }
+
+      .like {
+        background-color: #74ca46;
+      }
+
+      .fa-sun-o {
+        display: block;
+        margin: 0 auto;
+      }
+    }
   }
 
   .article-center {
     width: 50%;
     padding: 20px;
     margin-top: 20px;
-    background-color: #fff;
 
     .article-title {
       margin-bottom: 20px;

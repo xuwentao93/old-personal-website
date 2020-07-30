@@ -1,5 +1,5 @@
 /* eslint-disable comma-dangle */
-export const typeList = [
+export const TYPE_LIST = [
   {
     label: '前端',
     value: 'frontend'
@@ -19,5 +19,9 @@ export const typeList = [
   {
     label: '其他',
     value: 'other'
+  },
+  {
+    label: '近况',
+    value: 'recent'
   }
 ];
