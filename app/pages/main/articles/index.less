@@ -9,23 +9,22 @@
   margin-right: 2px;
 }
 
-@media screen and (min-width: 700px) {
-  .articles {
-    padding: 0 20px 20px 20px;
-    margin-top: 40px;
-  }
-  
+.personal-articles-container {
+  padding: 0 20px 20px 20px;
+  margin-top: 40px;
+
   .menu-list {
     .clearFloat();
     .setTextLine(60px);
     padding-right: 20px;
     margin-bottom: 20px;
     background-color: #000;
-  
+
     .type-list {
       float: left;
+      margin-bottom: 20px;
       // width: 392px;
-  
+
       .article-type {
         .setTextLine(28px);
         padding: 0 15px;
@@ -34,12 +33,12 @@
         border-radius: 3px;
         background-color: #25252b;
         color: #ddd;
-  
+
         &:hover {
           .article-type-hover();
         }
       }
-  
+
       .article-type-hover {
         border-top-color: #d18e59;
         color: #5e068c;
@@ -48,19 +47,19 @@
         cursor: pointer;
       }
     }
-  
+
     .search {
       float: right;
       width: calc(92% - 392px);
     }
-  
+
     @media screen and (max-width: 1650px) {
       .search {
         display: none;
       }
     }
   }
-  
+
   .article {
     width: 100%;
     padding: 10px 20px;
@@ -70,25 +69,22 @@
     background-color: #fff;
     box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
     cursor: pointer;
-    
+
     .article-navigator {
       border-bottom: 1px solid #ebecef;
       padding-bottom: 8px;
     }
-
     .type {
       font-size: @type-size;
       font-weight: @type-weight;
       color: #ff0068;
       font-family: @common-family;
     }
-
     .type-circle {
       display: inline-block;
       margin: 0 1px;
       color: #888;
     }
-
     .subtype {
       display: inline-block;
       margin-right: 12px;
@@ -97,7 +93,7 @@
       font-family:  @common-family;
       color: #b71ed7;
     }
-  
+
     .title {
       line-height: 26px;
       font-size: 19px;
@@ -105,13 +101,13 @@
       font-weight: normal;
       color: #333;
     }
-  
+
     .article-img {
       float: right;
       height: 100px;
       width: 100px;
     }
-  
+
     .text {
       margin-bottom: 12px;
       font-size: 14px;
@@ -119,14 +115,12 @@
       font-family: Consolas, -apple-system, system-ui, BlinkMacSystemFont, Helvetica Neue, PingFang SC;
       color: #b2bac2
     }
-  
+
     .brief {
       font-size: 16px;
-
       .time {
         color: #888;
       }
-
       .number {
         display: inline-block;
         margin-left: 2px;
@@ -137,7 +131,6 @@
         position: relative;
         right: 6%;
       }
-
       .comment {
         display: flex;
         align-items: center;
@@ -151,5 +144,8 @@
       }
     }
   }
+
+  .article-list {
+    margin-bottom: 20px;
+  }
 }
-  

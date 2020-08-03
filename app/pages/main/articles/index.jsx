@@ -1,22 +1,19 @@
 /* eslint-disable func-names */
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
-// eslint-disable-next-line no-unused-vars
-import { Button } from 'antd';
-import './pc.less';
-import './mobile.less';
-// import 'antd/es/button/style/css';
-import { getArticleMsgApi } from '@/models/actions/getArticles';
+import { Pagination } from 'antd';
+import './index.less';
+import { getTypeArticle } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
 // import Input from '@/components/Input';
 import { ARTICLE_TYPE_HOVER, TYPES, TYPE_TOGGLE } from './constant';
 
 // eslint-disable-next-line object-curly-newline
-function Articles({ typeArticleApi }) {
+function Articles() {
   let history = useHistory();
   const [articleList, setArticleList] = useState([]);
+  const [count, setCount] = useState(0);
+  const [articleType, setArticleType] = useState('all');
   const [articleTypeHoverList, setArticleTypeHoverList] = useState(TYPES.map((type, index) => {
     if (index === 0) return ARTICLE_TYPE_HOVER;
     return undefined;
@@ -25,15 +22,11 @@ function Articles({ typeArticleApi }) {
   // const [articleNameValue, setArticleNameValue] = useState('');
   const methods = {
     setType(index) { // 根据类型选择文章列表.
-      console.log(articleList);
       const copyList = TYPES.map(() => undefined);
       copyList[index] = ARTICLE_TYPE_HOVER;
       setArticleTypeHoverList(copyList);
-      (async function () {
-        const currentTypeArticleList = await typeArticleApi(TYPES[index].type);
-        await setArticleList(currentTypeArticleList);
-        // console.log(typeArticleList);
-      }());
+      methods.getTypeArticle(TYPES[index].type, 1);
+      setArticleType(TYPES[index].type);
     },
     // setArticleNameValue(event) { // input search function.
     //   setArticleNameValue(event.target.value);
@@ -47,17 +40,27 @@ function Articles({ typeArticleApi }) {
     // },
     toArticle(url) {
       history.push(`/main/article/${url}`);
+    },
+    getTypeArticle(type, curPageIndex) {
+      getTypeArticle({
+        type,
+        pageSize: 5,
+        pageIndex: curPageIndex
+      }).then((res) => {
+        setArticleList(res.data.articleList);
+        setCount(res.data.count);
+      });
+    },
+    changePage(page) {
+      methods.getTypeArticle(articleType, page);
     }
   };
   useEffect(() => {
-    (async function () {
-      const renderArticleList = await typeArticleApi('all');
-      setArticleList(renderArticleList);
-    }());
+    methods.getTypeArticle('all', 1);
   }, []);
 
   return (
-    <div className="articles">
+    <div className="personal-articles-container">
       <div className="menu-list">
         <ul className="type-list">
           {
@@ -120,22 +123,9 @@ function Articles({ typeArticleApi }) {
           ))
         }
       </ul>
+      <Pagination total={count} pageSize={5} onChange={(page) => methods.changePage(page)} />
     </div>
   );
 }
 
-const getArticleList = (state) => {
-  const { typeArticleList } = state;
-  // console.log(state);
-  return { typeArticleList };
-};
-
-const setArticleList = (dispatch) => ({
-  typeArticleApi: (type) => dispatch(getArticleMsgApi({ type }))
-});
-
-Articles.propTypes = {
-  typeArticleApi: PropTypes.func.isRequired
-};
-
-export default (connect(getArticleList, setArticleList))(Articles);
+export default Articles;

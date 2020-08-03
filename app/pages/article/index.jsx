@@ -5,8 +5,6 @@ import { useParams } from 'react-router-dom';
 import { readArticle, likeArticle } from '@/api/article';
 // eslint-disable-next-line import/no-unresolved
 import View from '@/components/view';
-// eslint-disable-next-line import/no-unresolved
-// import { IF_LIKE } from '@/config/localStorage';
 
 export default function Article() {
   let { id } = useParams();
@@ -20,18 +18,12 @@ export default function Article() {
   });
   const [ifDark, setIfDark] = useState(false);
   const [ifLike, setIfLike] = useState(localStorage.getItem(id) === 'like');
-  console.log(localStorage.getItem(id));
-  // const [article, setArticle] = useState('');
-  // const [title, setTitle] = useState('');
-  // const [thumbsup, setThumbsup] = useState('');
-  // const [isLiked, setIsLiked] = useState(false);
   const methods = {
     readArticle() {
       readArticle({
         article: id
       })
         .then((res) => {
-          console.log(res);
           const { data } = res;
           setArticleMsg({
             ...articleMsg,
@@ -46,7 +38,6 @@ export default function Article() {
         type: curType === 'like' ? 'dislike' : 'like',
         url: id
       }).then(() => {
-        console.log(curType);
         if (ifLike) setArticleMsg({ ...articleMsg, thumbsup: articleMsg.thumbsup - 1 });
         else setArticleMsg({ ...articleMsg, thumbsup: articleMsg.thumbsup + 1 });
         localStorage.setItem(id, curType === 'like' ? 'dislike' : 'like');

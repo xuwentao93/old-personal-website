@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { renderRoutes } from '@/utils/route';
@@ -28,6 +28,8 @@ export default function Container({ routes }) {
 
 function Main() {
   const width = window.innerWidth;
+  const [type, setType] = useState('all');
+  console.log(type);
   if (width > 700) {
     return (
       <div className="main">
@@ -40,7 +42,7 @@ function Main() {
         </div>
         <div className="center">
           <Situation />
-          <Articles />
+          <Articles setType={setType} />
         </div>
       </div>
     );

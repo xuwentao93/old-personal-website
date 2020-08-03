@@ -6,16 +6,14 @@ import {
   Modal,
   Input
 } from 'antd';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { writeArticle } from '@/api/article';
+import Types from 'prop-types';
+import { writeArticle, getArticleSubType } from '@/api/article';
 import { dateFormat } from '@/utils';
-import { articleSubType } from '@/models/actions/getArticleSubType';
 import { identifyCheck } from '@/api/user';
 import { TYPE_LIST } from './constant';
 import './index.less';
 
-function Title(props) {
+export default function Title(props) {
   const { Option } = Select;
   const { text } = props;
   const [title, setTitle] = useState('');
@@ -53,8 +51,11 @@ function Title(props) {
     },
     async changeTypeValue(value) {
       setType(value);
-      let getsubtype = await props.typeArticleApi(value);
-      setSubtypeList(getsubtype);
+      getArticleSubType({
+        type: value
+      }).then((res) => {
+        setSubtypeList(JSON.parse(res.data.subtypeList));
+      });
     },
     setConfirmSubtype(confirmSubtype) {
       setSubtype(confirmSubtype);
@@ -188,19 +189,6 @@ function Title(props) {
   );
 }
 
-const subTypeList = (state) => {
-  const { selectSubtype } = state;
-  // console.log(state);
-  return { selectSubtype };
-};
-
-const getSubType = (dispatch) => ({
-  typeArticleApi: (type) => dispatch(articleSubType({ type }))
-});
-
 Title.propTypes = {
-  text: PropTypes.string.isRequired,
-  typeArticleApi: PropTypes.func.isRequired
+  text: Types.any.isRequired
 };
-
-export default (connect(subTypeList, getSubType))(Title);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './index.less';
-import { getArticleMsg } from '@/api/article';
+import { getCurrentArticle } from '@/api/article';
 
 function toggleType(type) {
   switch (type) {
@@ -23,9 +23,7 @@ function toggleType(type) {
 export default function Recently() {
   const [articleList, setArticleList] = useState([]);
   useEffect(() => {
-    getArticleMsg({
-      current: true
-    })
+    getCurrentArticle()
       .then((res) => {
         setArticleList(res.data.articleList);
       })
