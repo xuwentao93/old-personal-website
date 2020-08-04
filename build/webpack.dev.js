@@ -9,7 +9,7 @@ const webpackConfig = merge(webpackBase, {
   output: {
     path: path.join(__dirname, '../dist'), // 打包后的文件存放的地方
     filename: '[name]_[hash].js',
-    publicPath: '/' //  ??? whats' this?
+    publicPath: '/'
   },
   devtool: 'source-map',
   devServer: {

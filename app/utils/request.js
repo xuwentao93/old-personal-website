@@ -3,8 +3,8 @@ import qs from 'qs';
 
 const request = axios.create({
   timeout: 10000,
-  baseURL: 'http://localhost:3000',
-  // baseURL: 'http://www.xuwentao.com:3000',
+  // baseURL: 'http://127.0.0.1:3000',
+  baseURL: 'http://www.xuwentao.com:3000',
   headers: {
     'Content-type': 'application/x-www-form-urlencoded'
   }

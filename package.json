@@ -4,7 +4,6 @@
   "description": "webpack config lear",
   "main": "app/index.js",
   "scripts": {
-    "test": "I don't know what this property means.",
     "build": "webpack --config build/webpack.prod.js",
     "dev": "npm start",
     "ssr": "webpack --config build/webpack.ssr.js",
