@@ -6,9 +6,7 @@ import './index.less';
 export default function View(props) {
   const { text, style = {} } = props;
   return (
-    <>
-      <div className="personal-view" dangerouslySetInnerHTML={{ __html: text }} style={style} />
-    </>
+    <div className="personal-view-container" dangerouslySetInnerHTML={{ __html: text }} style={style} />
   );
 }
 

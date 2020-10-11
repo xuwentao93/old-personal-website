@@ -2,11 +2,10 @@ import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { renderRoutes } from '@/utils/route';
-import './pc.less';
-import './mobile.less';
+import './index.less';
 import Navigator from './navigator';
 import Footer from './footer';
-import Toy from './toy';
+import Profile from './profile';
 import Situation from './situation';
 import Articles from './articles';
 import Recommond from './recommand';
@@ -34,7 +33,7 @@ function Main() {
     return (
       <div className="main">
         <div className="left">
-          <Toy />
+          <Profile />
         </div>
         <div className="right">
           <Recommond />

@@ -16,6 +16,14 @@ const list = [
   {
     label: '日记',
     to: '/dict'
+  },
+  {
+    label: '算法统计',
+    to: '/algorithm'
+  },
+  {
+    label: '文本编辑器',
+    to: '/editor'
   }
 ];
 

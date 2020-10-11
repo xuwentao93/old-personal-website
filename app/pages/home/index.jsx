@@ -3,15 +3,16 @@ import { Link } from 'react-router-dom';
 import './index.less';
 // import './pc.less';
 // import './mobile.less';
-import koala from '@/assets/home/koala.jpeg';
-import panda from '@/assets/home/panda.jpeg';
-import puppy from '@/assets/home/puppy.jpeg';
-import kitty from '@/assets/home/kitty.jpeg';
-import sheeps from '@/assets/home/sheeps.jpeg';
-import alpaca from '@/assets/home/alpaca.jpeg';
 
 let index = 1;
-const imgList = [alpaca, koala, panda, puppy, sheeps, kitty];
+const imgList = [
+  'https://img.alicdn.com/tfs/TB1ZJ2wVYr1gK0jSZFDXXb9yVXa-780-520.jpg',
+  'https://img.alicdn.com/tfs/TB1KorsV1H2gK0jSZJnXXaT1FXa-780-519.jpg',
+  'https://img.alicdn.com/tfs/TB1IKroV.z1gK0jSZLeXXb9kVXa-780-519.jpg',
+  'https://img.alicdn.com/tfs/TB1D3zHV1L2gK0jSZFmXXc7iXXa-780-520.jpg',
+  'https://img.alicdn.com/tfs/TB11zxTmQ9l0K4jSZFKXXXFjpXa-780-520.jpg',
+  'https://img.alicdn.com/tfs/TB1KWHvVWL7gK0jSZFBXXXZZpXa-780-520.jpg'
+];
 
 const selfComunity = [
   {

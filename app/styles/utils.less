@@ -2,19 +2,19 @@
 @navigation-index: 999;
 @high-index: 99;
 
-.navigation() {
+.navigation() { // 顶部导航栏定位.
   position: fixed;
   top: 0;
   left: 0;
   z-index: @navigation-index;
 }
 
-.textCenter(@height) {
+.textCenter(@height) { // 字体居中.
   text-align: center;
   line-height: @height;
 }
 
-.clearFloat() {
+.clearFloat() { // 清除浮动.
   &::after {
     content: '';
     display: block;
@@ -22,7 +22,12 @@
   }
 }
 
-.setTextLine(@height) {
+.setTextLine(@height) { // 设置行高.
   height: @height;
   line-height: @height;
+}
+
+.wt-f { // flex 布局.
+  display: flex;
+  align-items: center;
 }

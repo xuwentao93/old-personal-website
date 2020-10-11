@@ -52,7 +52,7 @@ export default function Article() {
   return (
     <div
       className="personal-article-container"
-      style={{ backgroundColor: ifDark ? '#333' : '#f4f5f5', color: ifDark ? '#ccc' : '#333' }}
+      style={{ backgroundColor: ifDark ? '#333' : '#f4f5f5', color: ifDark ? '#ccc' : '#000' }}
     >
       <div className="article-left">
         <div className="operate-list">
@@ -79,14 +79,14 @@ export default function Article() {
       </div>
       <article
         className="article-center"
-        style={{ backgroundColor: ifDark ? '#222' : '#fff', color: ifDark ? '#ccc' : '#333' }}
+        style={{ backgroundColor: ifDark ? '#222' : '#fff', color: ifDark ? '#ccc' : '#000' }}
       >
         <h1 className="article-title" style={{ color: ifDark ? '#ccc' : '#333' }}>
           { articleMsg.title }
         </h1>
         <View
           text={articleMsg.article}
-          style={{ backgroundColor: ifDark ? '#222' : '#fff', color: ifDark ? '#ccc' : '#333' }}
+          style={{ backgroundColor: ifDark ? '#222' : '#fff', color: ifDark ? '#ccc' : '#000' }}
         />
       </article>
     </div>
