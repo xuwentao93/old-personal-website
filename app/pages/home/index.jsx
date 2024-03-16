@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import juejin from '../../assets/juejin.png';
 import './index.less';
 // import './pc.less';
 // import './mobile.less';
@@ -30,7 +31,7 @@ const selfComunity = [
   {
     href: 'https://juejin.im/user/5da17f266fb9a04dde146c5d',
     title: 'juejin/piedaochuan1234',
-    src: 'https://b-gold-cdn.xitu.io/favicons/v2/apple-touch-icon.png',
+    src: juejin,
     alt: 'my juejin homepage'
   },
   {
@@ -43,8 +44,10 @@ const selfComunity = [
 
 export default function Home() {
   const home = useRef();
+
   useEffect(() => {
     const { style } = home.current;
+    console.log(1);
     style.backgroundImage = `url(${imgList[0]})`;
     setInterval(() => {
       style.backgroundImage = `url(${imgList[index++]})`;

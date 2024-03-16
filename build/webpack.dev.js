@@ -1,7 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
 const { merge } = require('webpack-merge');
-const OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 const webpackBase = require('./webpack.base');
 
 const webpackConfig = merge(webpackBase, {
@@ -11,18 +10,20 @@ const webpackConfig = merge(webpackBase, {
     filename: '[name]_[hash].js',
     publicPath: '/'
   },
-  devtool: 'source-map',
   devServer: {
-    contentBase: '../dist',
+    static: path.join(__dirname, '../dist'),
     port: 2222,
+    // 是否打开热模块更新.
     hot: true,
-    stats: 'errors-only',
-    historyApiFallback: true // 解决 bowserRouter 刷新的时候出现 can't get.
+    // 启动后自动打开页面
+    open: true,
+    // 解决 bowserRouter 刷新的时候出现 can't get.
+    historyApiFallback: true
   },
   mode: 'development',
   plugins: [
+    // 页面能够局部更新, 不需要全部刷新.
     new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserWebpackPlugin({ url: 'http://localhost:2222' })
   ]
 });
 
