@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const OpenBrowserWebpackPlugin = require('open-browser-webpack-plugin');
 const webpackBase = require('./webpack.base');
 

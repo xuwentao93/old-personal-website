@@ -77,7 +77,6 @@ module.exports = {
       minify: {
         html5: true,
         collapseWhitespace: true,
-        preserveLineBreaks: false,
         minifyCSS: true,
         minifyJS: true,
         removeComments: false
@@ -94,14 +93,16 @@ module.exports = {
   ],
   optimization: {
     splitChunks: {
+      // 所有公共代码都打包, 默认只打包异步.
       chunks: 'all',
-      minSize: 10000,
-      // minChunks: 2,
+      // 只有大于该数值才会被提取, 默认 20000(byte).
+      minSize: 1024,
       name: true,
       cacheGroups: {
         react: {
           test: /(react|react-dom|redux|react-router|react-router-dom|react-redux)/,
           chunks: 'all',
+          // 相同条件下, 先按哪个优先级打包.
           priority: 1
         },
         vendors: {
