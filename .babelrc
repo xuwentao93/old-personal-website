@@ -1,6 +1,9 @@
 {
   "presets": [
+    // 扩展到最新
     "@babel/preset-env",
-    "@babel/preset-react"
+    // 解析 react jsx 语法.
+    "@babel/preset-react",
+    "@babel/preset-typescript"
   ]
 }
