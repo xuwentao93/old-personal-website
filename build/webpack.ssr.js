@@ -1,48 +1,29 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
-const cssnano = require('cssnano');
-const merge = require('webpack-merge');
-const webpackBase = require('./webpack.base');
+import path from 'path';
+import nodeExternals from 'webpack-node-externals';
+import CleanWebpackPlugin from 'clean-webpack-plugin';
 
-module.exports = merge(webpackBase, {
-  entry: path.join(__dirname, '../app/main-server.js'),
-  output: {
-    path: path.join(__dirname, '../dist'),
-    filename: '[name]-server.js',
-    libraryTarget: 'umd'
+module.exports = {
+  target: 'node',
+  mode: 'development', // 开发模式
+  entry: path.join(__dirname, '../app/main-ssr.js'), // 入口
+  output: { // 打包出口
+    filename: 'bundle.js', // 打包后的文件名
+    path: path.resolve(__dirname, '../dist') // 存放到根目录的build文件夹
   },
-  devServer: {
-    contentBase: '../dist',
-    port: 3333
+  externals: [nodeExternals()], // 保持node中require的引用方式
+  module: {
+    rules: [{ // 打包规则
+      test: /\.js?$/, // 对所有js文件进行打包
+      loader: 'babel-loader', // 使用babel-loader进行打包
+      exclude: /node_modules/ // 不打包node_modules中的js文件
+      // options: {
+      //   presets: ['react', 'stage-0', ['env', {
+      //     // loader时额外的打包规则,对react,JSX，ES6进行转换
+      //   }]]
+      // }
+    }]
   },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  devtool: 'source-map',
-  mode: 'production',
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new OptimizeCssAssetsWebpackPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: cssnano
-    }),
-    new HtmlWebpackPlugin({
-      template: path.join(__dirname, '../app/index.html'),
-      filename: 'index.html',
-      chunks: ['main'],
-      inject: true,
-      minify: {
-        html5: true,
-        collapseWhitespace: true,
-        preserveLineBreaks: false,
-        minifyCSS: true,
-        minifyJS: true,
-        removeComments: false
-      }
-    }),
     new CleanWebpackPlugin()
   ]
-});
+};

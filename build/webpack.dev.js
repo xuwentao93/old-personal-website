@@ -12,7 +12,7 @@ const webpackConfig = merge(webpackBase, {
   },
   devServer: {
     static: path.join(__dirname, '../dist'),
-    port: 2222,
+    port: 2223,
     // 是否打开热模块更新.
     hot: true,
     // 启动后自动打开页面
@@ -23,7 +23,7 @@ const webpackConfig = merge(webpackBase, {
   mode: 'development',
   plugins: [
     // 页面能够局部更新, 不需要全部刷新.
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HotModuleReplacementPlugin()
   ]
 });
 

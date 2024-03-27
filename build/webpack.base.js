@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 // const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MyPlugin = require('../plugin');
 // const HappyPack = require('happypack');
 // const TerserPlugin = require('terser-webpack-plugin');
 
@@ -25,12 +26,6 @@ module.exports = {
           {
             test: /\.(js|jsx)$/,
             use: [
-              {
-                loader: 'thread-loader',
-                options: {
-                  workers: 3
-                }
-              },
               'babel-loader',
               'eslint-loader'
               // ['happypack/loader?id=babels']
@@ -70,6 +65,10 @@ module.exports = {
           {
             test: /\.(woff|woff2|eot|ttf|otf)$/,
             use: 'file-loader'
+          },
+          {
+            test: /\.md$/,
+            use: path.resolve(__dirname, '../loader')
           }
         ]
       }
@@ -94,7 +93,8 @@ module.exports = {
         minifyJS: true,
         removeComments: false
       }
-    })
+    }),
+    new MyPlugin()
     // new HappyPack({
     //   id: 'babel',
     //   loaders: ['babel-loader?cacheDirectory', 'eslint-loader']

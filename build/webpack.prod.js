@@ -4,19 +4,26 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
+const glob = require('glob');
 const webpackBase = require('./webpack.base.js');
+
+// 配置组件多入口.很强!
+const components = glob.sync(path.join(__dirname, '../app/components/*/')).reduce((prev, curr) => ({
+  [`${path.basename(curr)}`]: curr,
+  ...prev
+}), {});
 
 const smp = new SpeedMeasureWebpackPlugin({ disable: true });
 
 const webpackConfig = merge(webpackBase, smp.wrap({
-  entry: path.join(__dirname, '../app/main.js'),
+  entry: {
+    ...components
+  },
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: './js/[name]_[hash:8].js'
-    // filename: '/js/bundle.js'
+    filename: './js/[name].js'
   },
-  // stats: 'errors-only',
   mode: 'production',
   optimization: {
     minimizer: [
@@ -27,12 +34,7 @@ const webpackConfig = merge(webpackBase, smp.wrap({
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    // new OptimizeCssAssetsWebpackPlugin({ // css 压缩导致打包报错 exit code: 1.
-    //   assetNameRegExp: /\.css$/g,
-    //   cssProcessor: cssnano
-    // }),
     new CleanWebpackPlugin()
-    // new SpeedMeasureWebpackPlugin()
   ]
 }));
 

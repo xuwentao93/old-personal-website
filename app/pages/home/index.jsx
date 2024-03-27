@@ -2,8 +2,11 @@ import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import juejin from '../../assets/juejin.png';
 import './index.less';
+import x from './test.md';
 // import './pc.less';
 // import './mobile.less';
+
+console.log('x', x);
 
 let index = 1;
 const imgList = [
